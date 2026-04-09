@@ -1,0 +1,12 @@
+<svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+  <circle cx="75" cy="75" r="75" fill="#4CAF50"/>
+  <circle cx="75" cy="45" r="25" fill="#D7CCC8"/>
+  <path d="M 55 70 Q 55 55 75 55 Q 95 55 95 70 L 95 105 Q 75 120 55 105 Z" fill="#388E3C"/>
+  <!-- Hair with style -->
+  <path d="M 60 25 Q 75 10 90 25 Q 95 35 75 50 Q 55 35 60 25" fill="#5D4037"/>
+  <!-- Eyes -->
+  <ellipse cx="65" cy="42" rx="3.5" ry="5" fill="#1A1A1A"/>
+  <ellipse cx="85" cy="42" rx="3.5" ry="5" fill="#1A1A1A"/>
+  <!-- Smile -->
+  <path d="M 68 53 Q 75 58 82 53" stroke="#704214" stroke-width="2" fill="none"/>
+</svg>

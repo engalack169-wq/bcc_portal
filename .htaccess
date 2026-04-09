@@ -1,0 +1,11 @@
+# Enable URL rewriting
+RewriteEngine On
+
+# Set base path for the project
+RewriteBase /stitch1/
+
+# DirectoryIndex
+DirectoryIndex index.php
+
+# Handle missing files - redirect to main index
+ErrorDocument 404 /stitch1/index.php

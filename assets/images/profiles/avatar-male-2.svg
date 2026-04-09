@@ -1,0 +1,11 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+  <circle cx="100" cy="100" r="100" fill="#F57C00"/>
+  <circle cx="100" cy="60" r="35" fill="#F4A460"/>
+  <path d="M 55 130 Q 55 110 100 110 Q 145 110 145 130 L 145 175 Q 100 195 55 175 Z" fill="#E65100"/>
+  <ellipse cx="90" cy="55" rx="7" ry="11" fill="#1A1A1A"/>
+  <ellipse cx="110" cy="55" rx="7" ry="11" fill="#1A1A1A"/>
+  <circle cx="90" cy="55" r="3" fill="#000000"/>
+  <circle cx="110" cy="55" r="3" fill="#000000"/>
+  <path d="M 98 68 Q 100 72 102 68" stroke="#8B4513" stroke-width="2" fill="none"/>
+  <text x="100" y="185" font-size="10" fill="white" text-anchor="middle" opacity="0.8">avatar-male-2</text>
+</svg>

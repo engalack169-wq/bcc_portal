@@ -1,0 +1,15 @@
+<svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bizGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1565C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D3B66;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="url(#bizGrad)"/>
+  <rect x="80" y="100" width="480" height="280" fill="#FFFFFF" rx="15" opacity="0.95"/>
+  <circle cx="150" cy="170" r="40" fill="#FF9800" opacity="0.8"/>
+  <rect x="250" y="140" width="200" height="80" fill="#E8EAF6" rx="5"/>
+  <text x="350" y="185" font-size="24" font-weight="bold" fill="#1565C0" text-anchor="middle">Business</text>
+  <text x="320" y="340" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Business Meeting</text>
+  <text x="320" y="375" font-size="16" fill="white" text-anchor="middle">Professional Services - 640x480</text>
+</svg>
