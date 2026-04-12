@@ -63,6 +63,10 @@ require_once __DIR__ . '/../../includes/header.php';
                             <h3><?php echo htmlspecialchars(get_user_display_name()); ?></h3>
                             <p><?php echo htmlspecialchars(get_user_email()); ?></p>
                             <span class="user-role"><?php echo ucfirst(get_user_role()); ?></span>
+                            <a href="#" data-nav="profile" class="btn btn-sm btn-primary" style="margin-top: 1rem; display: inline-block;">
+                                <span class="material-symbols-outlined">person</span>
+                                View Profile
+                            </a>
                         </div>
                     </div>
                     <div class="quick-stats">
@@ -92,28 +96,28 @@ require_once __DIR__ . '/../../includes/header.php';
                 </div>
                 <div class="card-content">
                     <div class="action-grid">
-                        <a href="business-license.php" class="action-item">
+                        <a href="#" data-nav="business-license" class="action-item">
                             <div class="action-icon">
                                 <span class="material-symbols-outlined">business</span>
                             </div>
                             <h3>Business License</h3>
                             <p>Apply or renew license</p>
                         </a>
-                        <a href="property-registry.php" class="action-item">
+                        <a href="#" data-nav="property-registry" class="action-item">
                             <div class="action-icon">
                                 <span class="material-symbols-outlined">apartment</span>
                             </div>
                             <h3>Property Registry</h3>
                             <p>Register property</p>
                         </a>
-                        <a href="payments.php" class="action-item">
+                        <a href="#" data-nav="payments" class="action-item">
                             <div class="action-icon">
                                 <span class="material-symbols-outlined">payments</span>
                             </div>
                             <h3>Make Payment</h3>
                             <p>Pay fees online</p>
                         </a>
-                        <a href="service-history.php" class="action-item">
+                        <a href="#" data-nav="service-history" class="action-item">
                             <div class="action-icon">
                                 <span class="material-symbols-outlined">history</span>
                             </div>
@@ -221,7 +225,7 @@ require_once __DIR__ . '/../../includes/header.php';
                         <span class="material-symbols-outlined">gavel</span>
                         Your Services
                     </h2>
-                    <a href="services.php" class="view-all">Browse All Services</a>
+                    <a href="#" data-nav="services" class="view-all">Browse All Services</a>
                 </div>
                 <div class="card-content">
                     <div class="services-grid">
@@ -275,6 +279,9 @@ require_once __DIR__ . '/../../includes/header.php';
 // Include footer
 require_once __DIR__ . '/../../includes/footer.php';
 ?>
+
+<!-- Dashboard Integration JavaScript -->
+<script src="../../assets/js/dashboard-integration.js"></script>
 
 <style>
 /* Dashboard Styles */

@@ -18,6 +18,9 @@ switch ($action) {
     case 'login':
         handle_login();
         break;
+    case 'register':
+        handle_register();
+        break;
     case 'logout':
         handle_logout();
         break;
@@ -27,6 +30,155 @@ switch ($action) {
     default:
         echo json_encode(['success' => false, 'message' => 'Invalid action']);
         break;
+}
+
+/**
+ * Handle user registration
+ */
+function handle_register() {
+    // Collect and trim inputs
+    $first_name = trim($_POST['first_name'] ?? '');
+    $last_name = trim($_POST['last_name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $phone = trim($_POST['phone'] ?? '');
+    $date_of_birth = $_POST['date_of_birth'] ?? '';
+    $gender = $_POST['gender'] ?? '';
+    $address = trim($_POST['address'] ?? '');
+    $role = $_POST['role'] ?? 'citizen';
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
+    $terms = $_POST['terms'] ?? '';
+
+    // Validate required fields
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($password) || empty($confirm_password)) {
+        echo json_encode(['success' => false, 'message' => 'Please fill in all required fields']);
+        return;
+    }
+
+    // Validate terms agreement
+    if ($terms !== '1') {
+        echo json_encode(['success' => false, 'message' => 'You must agree to the Terms and Conditions']);
+        return;
+    }
+
+    // Validate email format
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid email format']);
+        return;
+    }
+
+    // Validate password match
+    if ($password !== $confirm_password) {
+        echo json_encode(['success' => false, 'message' => 'Passwords do not match']);
+        return;
+    }
+
+    // Validate password strength (minimum 8 chars, at least one uppercase, one lowercase, one number and one special char)
+    if (strlen($password) < 8) {
+        echo json_encode(['success' => false, 'message' => 'Password must be at least 8 characters long']);
+        return;
+    }
+
+    if (!preg_match('/[A-Z]/', $password)) {
+        echo json_encode(['success' => false, 'message' => 'Password must contain at least one uppercase letter']);
+        return;
+    }
+
+    if (!preg_match('/[a-z]/', $password)) {
+        echo json_encode(['success' => false, 'message' => 'Password must contain at least one lowercase letter']);
+        return;
+    }
+
+    if (!preg_match('/[0-9]/', $password)) {
+        echo json_encode(['success' => false, 'message' => 'Password must contain at least one number']);
+        return;
+    }
+
+    if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:\'",.<>?\/\\|`~]/', $password)) {
+        echo json_encode(['success' => false, 'message' => 'Password must contain at least one special character']);
+        return;
+    }
+
+    // Validate age (must be 18 or older)
+    if (!empty($date_of_birth)) {
+        $birth_date = new DateTime($date_of_birth);
+        $today = new DateTime();
+        $age = $today->diff($birth_date)->y;
+        
+        if ($age < 18) {
+            echo json_encode(['success' => false, 'message' => 'You must be at least 18 years old to create an account']);
+            return;
+        }
+    }
+
+    // Only allow citizen role for self-registration
+    if ($role !== 'citizen') {
+        $role = 'citizen'; // Force citizen role for security
+    }
+
+    try {
+        $db = Database::getInstance();
+
+        // Check if email already exists
+        $check_stmt = $db->getConnection()->prepare("SELECT id FROM users WHERE email = ?");
+        $check_stmt->bind_param("s", $email);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
+
+        if ($check_result->num_rows > 0) {
+            echo json_encode(['success' => false, 'message' => 'Email already registered']);
+            return;
+        }
+
+        // Hash password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $status = 'active';
+
+        // Insert new user
+        $insert_stmt = $db->getConnection()->prepare("
+            INSERT INTO users (
+                first_name, last_name, email, phone, date_of_birth, gender, 
+                address, role, password, status
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+
+        $insert_stmt->bind_param(
+            "ssssssssss",
+            $first_name, $last_name, $email, $phone, $date_of_birth, $gender,
+            $address, $role, $hashed_password, $status
+        );
+
+        if ($insert_stmt->execute()) {
+            // Set session for new user (auto-login)
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            
+            $user_id = $db->getConnection()->insert_id;
+            $display_name = trim($first_name . ' ' . $last_name);
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['user_email'] = $email;
+            $_SESSION['user_role'] = $role;
+            $_SESSION['user_name'] = $display_name;
+
+            echo json_encode([
+                'success' => true,
+                'message' => 'Account created successfully',
+                'redirect' => get_dashboard_url($role)
+            ]);
+        } else {
+            throw new Exception('Failed to create account: ' . $insert_stmt->error);
+        }
+
+    } catch (Throwable $e) {
+        error_log("Registration error: " . $e->getMessage());
+        $config = require __DIR__ . '/../config/app/config.php';
+        $responseMessage = 'Unable to create account. Please try again.';
+        if (!empty($config['app']['debug'])) {
+            $responseMessage = $e->getMessage();
+        }
+        echo json_encode(['success' => false, 'message' => $responseMessage]);
+    }
 }
 
 /**

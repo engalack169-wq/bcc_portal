@@ -248,6 +248,9 @@ require_once __DIR__ . '/navigation.php';
 }
 </style>
 
+<!-- Navigation Links Manager -->
+<script src="/stitch1/assets/js/navigation.js"></script>
+
 <!-- Enhanced Logout Script -->
 <?php if (is_authenticated()): ?>
 <script>
