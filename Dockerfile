@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     sqlite3 \
     libsqlite3-dev \
-    zip \
+    libzip-dev \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
