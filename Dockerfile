@@ -23,8 +23,8 @@ RUN docker-php-ext-install \
     zip \
     && docker-php-ext-enable pdo_sqlite pdo_mysql mysqli
 
-# Enable Apache mod_rewrite
-RUN a2enmod rewrite
+# Enable Apache modules
+RUN a2enmod rewrite headers deflate expires
 
 # Set PHP configurations
 RUN echo "upload_max_filesize = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
