@@ -1,0 +1,85 @@
+# Docker Environment - Local Development
+.env.docker
+.env.local
+.env.*.local
+
+# Docker artifacts
+docker-compose.override.yml
+.docker/
+
+# Development
+node_modules/
+vendor/
+.venv/
+venv/
+__pycache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs and caches
+logs/*
+cache/*
+!logs/.gitkeep
+!cache/.gitkeep
+
+# Database backups and data
+data/*.db
+data/*.db-shm
+data/*.db-wal
+backups/*
+!backups/.gitkeep
+
+# File uploads (keep directory, ignore files)
+uploads/documents/*
+uploads/avatars/*
+!uploads/.gitkeep
+!uploads/documents/.gitkeep
+!uploads/avatars/.gitkeep
+
+# Session files
+sessions/*
+!sessions/.gitkeep
+
+# Temporary files
+tmp/*
+temp/*
+.tmp/
+!tmp/.gitkeep
+!temp/.gitkeep
+
+# OS files
+Thumbs.db
+.AppleDouble
+.LSOverride
+*.sublime-project
+*.sublime-workspace
+
+# Test artifacts
+coverage/
+.phpunit.result.cache
+.coverage
+
+# Sensitive files
+*.pem
+*.key
+*.crt
+*.keystore
+
+# Build artifacts
+dist/
+build/
+*.zip
+*.tar.gz
+
+# Dependencies installed globally
+.installed_packages
+
+# Package manager files
+package-lock.json
+composer.lock

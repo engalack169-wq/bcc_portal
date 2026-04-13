@@ -97,6 +97,90 @@ stitch1/
    - Open your browser and navigate to your domain
    - Follow the setup wizard to complete installation
 
+## 🐳 Docker Quick Start (Recommended)
+
+### Docker Installation
+
+The project includes complete Docker support for easy development and deployment.
+
+#### Prerequisites
+- [Docker](https://www.docker.com/products/docker-desktop) (v20.10+)
+- [Docker Compose](https://docs.docker.com/compose/install/) (v1.29+)
+
+#### Quick Setup
+```bash
+# Clone and navigate to project
+git clone <repo-url> && cd bcc_portal
+
+# Run setup script (Linux/MacOS)
+chmod +x docker/setup.sh
+./docker/setup.sh
+
+# Or use Make (if available)
+make setup
+```
+
+#### Access Points
+- **Web Application**: http://localhost:8080
+- **MailHog (Email Testing)**: http://localhost:8025
+- **Database**: `./data/bamenda_council_db.db` (SQLite)
+
+#### Common Commands
+```bash
+# Start services
+docker-compose up -d
+
+# Stop services
+docker-compose down
+
+# View logs
+docker-compose logs -f web
+
+# Execute PHP command
+docker-compose exec web php script.php
+
+# Access database shell
+docker-compose exec web sqlite3 data/bamenda_council_db.db
+
+# Backup database
+docker-compose exec web php -r "require 'config/database/sqlite-database.php'; \$db = new SQLiteDatabase(); echo \$db->backup('backups');"
+```
+
+#### Using Makefile
+```bash
+# Build and start
+make docker-up
+
+# View logs
+make docker-logs
+
+# Initialize database
+make database-init
+
+# Open shell
+make docker-shell
+```
+
+#### Docker Configuration
+- **Database**: SQLite (easy setup, no external DB needed)
+- **Services**: Apache, PHP 8.1, Redis (optional), MailHog (optional)
+- **Volumes**: Automatic file syncing with local directory
+- **Network**: Isolated Docker network for services
+
+#### Switching to MySQL
+To use MySQL instead of SQLite, update `.env`:
+```bash
+DB_DRIVER=mysql
+DB_HOST=mysql
+DB_DATABASE=bamenda_council_db
+DB_USERNAME=root
+DB_PASSWORD=password
+```
+
+Then update `docker-compose.yml` to include MySQL service.
+
+See [DOCKER_SETUP_GUIDE.md](DOCKER_SETUP_GUIDE.md) for detailed Docker documentation.
+
 ## 🎨 Design System
 
 ### Color Palette
