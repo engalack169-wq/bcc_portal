@@ -398,7 +398,7 @@ function is_tablet() {
     return !is_mobile() && 
            (isset($_SERVER['HTTP_USER_AGENT']) && 
            (strpos($_SERVER['HTTP_USER_AGENT'], 'iPad') !== false || 
-           strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false);
+           strpos($_SERVER['HTTP_USER_AGENT'], 'Tablet') !== false));
 }
 
 function is_desktop() {
@@ -409,6 +409,8 @@ function is_desktop() {
  * Generate responsive CSS output
  */
 function generate_responsive_css() {
+    global $breakpoints, $container_max_widths, $grid_columns, $spacing_scale;
+    
     $css = "/* Responsive Design System */\n\n";
     
     // Container classes

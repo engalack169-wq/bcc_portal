@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/../config/database/database.php';
 require_once __DIR__ . '/../core/access-control.php';
+require_once __DIR__ . '/../core/csrf-protection.php';
 
 header('Content-Type: application/json');
 
@@ -19,6 +20,16 @@ if (!$user_id) {
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
     exit;
+}
+
+// Validate CSRF token for file upload operations
+if (in_array($action, ['upload_document', 'upload_avatar', 'delete_document'])) {
+    $csrf_token = $_POST['_csrf_token'] ?? '';
+    if (!CSRFProtection::validateToken($csrf_token)) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Invalid security token']);
+        exit;
+    }
 }
 
 // Configure upload directories

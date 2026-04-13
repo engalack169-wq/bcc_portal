@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/../config/database/database.php';
 require_once __DIR__ . '/../core/access-control.php';
+require_once __DIR__ . '/../core/csrf-protection.php';
 
 header('Content-Type: application/json');
 
@@ -18,6 +19,16 @@ if (!$user_id) {
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
     exit;
+}
+
+// Validate CSRF token for state-changing payment operations
+if (in_array($action, ['create_payment_intent', 'confirm_payment'])) {
+    $csrf_token = $_POST['_csrf_token'] ?? $_GET['_csrf_token'] ?? '';
+    if (!CSRFProtection::validateToken($csrf_token)) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Invalid security token']);
+        exit;
+    }
 }
 
 // Payment gateway configurations
@@ -90,14 +101,44 @@ function get_payment_methods($user_id) {
  */
 function create_payment_intent($user_id, $config) {
     try {
-        $amount = (float)($_POST['amount'] ?? 0);
-        $reference_id = $_POST['reference_id'] ?? '';
-        $description = $_POST['description'] ?? 'Service Payment';
+        $amount = isset($_POST['amount']) ? floatval($_POST['amount']) : 0;
+        $reference_id = trim($_POST['reference_id'] ?? '');
+        $description = trim($_POST['description'] ?? 'Service Payment');
         $payment_method = $_POST['payment_method'] ?? 'stripe';
         
-        if ($amount <= 0) {
+        // Validate amount
+        if ($amount <= 0 || $amount > 999999.99) {
             http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'Invalid amount']);
+            echo json_encode(['success' => false, 'message' => 'Invalid amount (must be between 0.01 and 999999.99)']);
+            return;
+        }
+        
+        // Validate reference ID
+        if (empty($reference_id)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Reference ID is required']);
+            return;
+        }
+        
+        // Validate reference ID length
+        if (strlen($reference_id) > 100) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Reference ID too long (max 100 characters)']);
+            return;
+        }
+        
+        // Validate description length
+        if (strlen($description) > 500) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Description too long (max 500 characters)']);
+            return;
+        }
+        
+        // Validate payment method
+        $allowed_methods = ['stripe', 'bank_transfer', 'mobile_money'];
+        if (!in_array($payment_method, $allowed_methods)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid payment method']);
             return;
         }
         
@@ -105,14 +146,18 @@ function create_payment_intent($user_id, $config) {
         
         // Create payment record
         $stmt = $db->getConnection()->prepare("
-            INSERT INTO payments (user_id, reference_id, description, amount, status)
-            VALUES (?, ?, ?, ?, 'pending')
+            INSERT INTO payments (user_id, reference_id, description, amount, payment_method, status)
+            VALUES (?, ?, ?, ?, ?, 'pending')
         ");
         
-        $stmt->bind_param("issd", $user_id, $reference_id, $description, $amount);
+        if (!$stmt) {
+            throw new Exception('Prepare failed: ' . $db->getConnection()->error);
+        }
+        
+        $stmt->bind_param("issds", $user_id, $reference_id, $description, $amount, $payment_method);
         
         if (!$stmt->execute()) {
-            throw new Exception('Failed to create payment record');
+            throw new Exception('Failed to create payment record: ' . $stmt->error);
         }
         
         $payment_id = $db->getConnection()->insert_id;

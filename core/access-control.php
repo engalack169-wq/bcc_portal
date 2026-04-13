@@ -7,6 +7,9 @@
 // Include database configuration
 require_once __DIR__ . '/../config/database/database.php';
 
+// Include security headers
+require_once __DIR__ . '/security-headers.php';
+
 // Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/../config/database/database.php';
 require_once __DIR__ . '/../core/access-control.php';
+require_once __DIR__ . '/../core/csrf-protection.php';
 
 require_authentication();
 
@@ -14,6 +15,15 @@ $user_id = $_SESSION['user_id'] ?? null;
 if (!$user_id) {
     http_response_code(401);
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    exit;
+}
+
+// Validate CSRF token for export operations
+$csrf_token = $_GET['_csrf_token'] ?? '';
+if (!empty($csrf_token) && !CSRFProtection::validateToken($csrf_token)) {
+    http_response_code(403);
+    header('Content-Type: application/json');
+    echo json_encode(['success' => false, 'message' => 'Invalid security token']);
     exit;
 }
 
@@ -233,10 +243,16 @@ function export_all_documents($db, $user_id) {
             throw new Exception('Failed to create ZIP file');
         }
         
+        // Define allowed upload directory
+        $upload_base = realpath(__DIR__ . '/../uploads/documents/');
+        
         foreach ($documents as $doc) {
-            $file_path = __DIR__ . '/..' . $doc['file_path'];
-            if (file_exists($file_path)) {
-                $zip->addFile($file_path, $doc['document_name']);
+            // Security: Validate file path to prevent directory traversal
+            $file_path = realpath(__DIR__ . '/..' . $doc['file_path']);
+            
+            // Ensure file is within allowed directory
+            if ($file_path && strpos($file_path, $upload_base) === 0 && file_exists($file_path)) {
+                $zip->addFile($file_path, basename($file_path));
             }
         }
         
@@ -460,6 +476,31 @@ function generate_application_summary_html($application, $documents) {
         $doc_list .= "<tr><td>{$doc['document_name']}</td><td>{$doc['document_type']}</td><td><span style='color: {$status_color}; font-weight: 600;'>{$doc['status']}</span></td></tr>";
     }
     
+    // Pre-compute conditional content before heredoc
+    $completed_section = '';
+    if (!empty($application['completed_at'])) {
+        $completed_section = "<div class='info-row'><span class='label'>Completed:</span> <span class='value'>{$application['completed_at']}</span></div>";
+    }
+    
+    $documents_section = '';
+    if (!empty($documents)) {
+        $documents_section = "
+            <h2>Related Documents</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Document Name</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {$doc_list}
+                </tbody>
+            </table>
+            ";
+    }
+    
     return <<<HTML
     <!DOCTYPE html>
     <html lang="en">
@@ -507,7 +548,7 @@ function generate_application_summary_html($application, $documents) {
                 <div class="info-row"><span class="label">Title:</span> <span class="value">{$application['title']}</span></div>
                 <div class="info-row"><span class="label">Status:</span> <span class="value"><span class="status {$application['status']}">{$application['status']}</span></span></div>
                 <div class="info-row"><span class="label">Submitted:</span> <span class="value">{$application['submitted_at']}</span></div>
-                {$( !empty($application['completed_at']) ? "<div class='info-row'><span class='label'>Completed:</span> <span class='value'>{$application['completed_at']}</span></div>" : '')}
+                {$completed_section}
             </div>
             
             <h2>Description</h2>
@@ -515,21 +556,7 @@ function generate_application_summary_html($application, $documents) {
                 <p>{$application['description']}</p>
             </div>
             
-            {$( !empty($documents) ? "
-            <h2>Related Documents</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Document Name</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {$doc_list}
-                </tbody>
-            </table>
-            " : '')}
+            {$documents_section}
             
             <div class="footer">
                 <p>Generated on {date('Y-m-d H:i:s')}</p>

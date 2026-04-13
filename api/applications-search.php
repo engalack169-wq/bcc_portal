@@ -6,6 +6,7 @@
 
 require_once __DIR__ . '/../config/database/database.php';
 require_once __DIR__ . '/../core/access-control.php';
+require_once __DIR__ . '/../core/csrf-protection.php';
 
 header('Content-Type: application/json');
 
@@ -20,6 +21,17 @@ if (!$user_id) {
 }
 
 $action = $_GET['action'] ?? 'search';
+
+// Validate CSRF token for export operations
+if ($action === 'export') {
+    $csrf_token = $_GET['_csrf_token'] ?? '';
+    if (!CSRFProtection::validateToken($csrf_token)) {
+        http_response_code(403);
+        echo json_encode(['success' => false, 'message' => 'Invalid security token']);
+        exit;
+    }
+}
+
 $db = Database::getInstance();
 
 switch ($action) {
@@ -50,12 +62,21 @@ switch ($action) {
 function search_applications($db, $user_id) {
     try {
         $query = trim($_GET['q'] ?? '');
-        $limit = (int)($_GET['limit'] ?? 20);
-        $offset = (int)($_GET['offset'] ?? 0);
+        
+        // Validate and sanitize pagination parameters
+        $limit = max(1, min((int)($_GET['limit'] ?? 20), 100));  // 1-100 range
+        $offset = max(0, (int)($_GET['offset'] ?? 0));           // Non-negative
         
         if (empty($query)) {
             http_response_code(400);
             echo json_encode(['success' => false, 'message' => 'Search query required']);
+            return;
+        }
+        
+        // Validate query length (prevent excessively long searches)
+        if (strlen($query) > 255) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Search query too long (max 255 characters)']);
             return;
         }
         
@@ -114,14 +135,16 @@ function search_applications($db, $user_id) {
  */
 function filter_applications($db, $user_id) {
     try {
-        $status = $_GET['status'] ?? '';
-        $type = $_GET['type'] ?? '';
-        $date_from = $_GET['date_from'] ?? '';
-        $date_to = $_GET['date_to'] ?? '';
+        $status = trim($_GET['status'] ?? '');
+        $type = trim($_GET['type'] ?? '');
+        $date_from = trim($_GET['date_from'] ?? '');
+        $date_to = trim($_GET['date_to'] ?? '');
         $sort_by = $_GET['sort_by'] ?? 'submitted_at';
         $sort_order = strtoupper($_GET['sort_order'] ?? 'DESC');
-        $limit = (int)($_GET['limit'] ?? 20);
-        $offset = (int)($_GET['offset'] ?? 0);
+        
+        // Validate and sanitize pagination parameters
+        $limit = max(1, min((int)($_GET['limit'] ?? 20), 100));  // 1-100 range
+        $offset = max(0, (int)($_GET['offset'] ?? 0));           // Non-negative
         
         // Validate sort order
         if (!in_array($sort_order, ['ASC', 'DESC'])) {
@@ -132,6 +155,19 @@ function filter_applications($db, $user_id) {
         $allowed_sorts = ['submitted_at', 'status', 'title', 'completed_at'];
         if (!in_array($sort_by, $allowed_sorts)) {
             $sort_by = 'submitted_at';
+        }
+        
+        // Validate date format if provided
+        if (!empty($date_from) && !strtotime($date_from)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid date_from format']);
+            return;
+        }
+        
+        if (!empty($date_to) && !strtotime($date_to)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid date_to format']);
+            return;
         }
         
         $query = "

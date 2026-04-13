@@ -7,12 +7,22 @@
 // Include required files
 require_once __DIR__ . '/../config/database/database.php';
 require_once __DIR__ . '/access-control.php';
+require_once __DIR__ . '/csrf-protection.php';
 
 // Set content type to JSON for AJAX responses
 header('Content-Type: application/json');
 
 // Handle different actions
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
+
+// Validate CSRF token for state-changing operations
+if (in_array($action, ['login', 'register', 'logout'])) {
+    $csrf_token = $_POST['_csrf_token'] ?? $_GET['_csrf_token'] ?? '';
+    if (!CSRFProtection::validateToken($csrf_token)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid security token. Please try again.']);
+        exit;
+    }
+}
 
 switch ($action) {
     case 'login':
@@ -101,12 +111,19 @@ function handle_register() {
 
     // Validate age (must be 18 or older)
     if (!empty($date_of_birth)) {
-        $birth_date = new DateTime($date_of_birth);
-        $today = new DateTime();
-        $age = $today->diff($birth_date)->y;
-        
-        if ($age < 18) {
-            echo json_encode(['success' => false, 'message' => 'You must be at least 18 years old to create an account']);
+        try {
+            $config = require __DIR__ . '/../config/app/config.php';
+            $timezone = new DateTimeZone($config['app']['timezone'] ?? 'Africa/Douala');
+            $birth_date = new DateTime($date_of_birth, $timezone);
+            $today = new DateTime('now', $timezone);
+            $age = $today->diff($birth_date)->y;
+            
+            if ($age < 18) {
+                echo json_encode(['success' => false, 'message' => 'You must be at least 18 years old to create an account']);
+                return;
+            }
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'Invalid date of birth format']);
             return;
         }
     }
