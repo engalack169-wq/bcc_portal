@@ -33,7 +33,11 @@ RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf && \
 # Set PHP configurations
 RUN echo "upload_max_filesize = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo "post_max_size = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
-    && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/memory.ini
+    && echo "memory_limit = 256M" >> /usr/local/etc/php/conf.d/memory.ini \
+    && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/errors.ini \
+    && echo "display_errors = off" >> /usr/local/etc/php/conf.d/errors.ini \
+    && echo "log_errors = on" >> /usr/local/etc/php/conf.d/errors.ini \
+    && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/errors.ini
 
 # Create necessary directories with permissions
 RUN mkdir -p /var/www/html/data /var/www/html/uploads/documents /var/www/html/uploads/avatars \

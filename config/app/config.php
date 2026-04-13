@@ -8,22 +8,22 @@ return [
     'app' => [
         'name' => 'Bamenda City Council E-Governance Platform',
         'version' => '1.0.0',
-        'environment' => 'development', // development, staging, production
-        'debug' => true,
+        'environment' => getenv('ENVIRONMENT') ?: 'production',
+        'debug' => filter_var(getenv('DEBUG') ?: false, FILTER_VALIDATE_BOOLEAN),
         'timezone' => 'Africa/Douala',
         'charset' => 'UTF-8',
         'locale' => 'en',
-        'url' => 'http://localhost/stitch1',
-        'asset_url' => 'http://localhost/stitch1/assets',
+        'url' => getenv('APP_URL') ?: 'http://localhost',
+        'asset_url' => (getenv('APP_URL') ?: 'http://localhost') . '/assets',
         'session_lifetime' => 7200, // 2 hours
         'max_file_size' => 5242880, // 5MB
     ],
     
     'database' => [
-        'name' => 'bamenda_council_db',
-        'host' => 'localhost',
-        'user' => 'root',
-        'pass' => '',
+        'name' => getenv('DB_NAME') ?: 'bamenda_council_db',
+        'host' => getenv('DB_HOST') ?: 'localhost',
+        'user' => getenv('DB_USER') ?: 'root',
+        'pass' => getenv('DB_PASSWORD') ?: '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '',
@@ -31,20 +31,20 @@ return [
     
     'email' => [
         'driver' => 'smtp',
-        'host' => 'localhost',
-        'port' => 587,
-        'from' => 'noreply@bamendacity.gov.cm',
+        'host' => getenv('MAIL_HOST') ?: 'localhost',
+        'port' => getenv('MAIL_PORT') ?: 587,
+        'from' => getenv('MAIL_FROM') ?: 'noreply@bamendacity.gov.cm',
         'from_name' => 'Bamenda City Council',
         'encryption' => 'tls',
-        'username' => '',
-        'password' => '',
+        'username' => getenv('MAIL_USERNAME') ?: '',
+        'password' => getenv('MAIL_PASSWORD') ?: '',
     ],
     
     'security' => [
-        'encryption_key' => 'your-secret-encryption-key-here',
-        'jwt_secret' => 'your-jwt-secret-key-here',
+        'encryption_key' => getenv('ENCRYPTION_KEY') ?: 'your-secret-encryption-key-here',
+        'jwt_secret' => getenv('JWT_SECRET') ?: 'your-jwt-secret-key-here',
         'password_min_length' => 8,
-        'session_secure' => false, // Set to true for HTTPS
+        'session_secure' => filter_var(getenv('SESSION_SECURE') ?: false, FILTER_VALIDATE_BOOLEAN),
         'session_httponly' => true,
         'rate_limit' => [
             'login_attempts' => 5,
