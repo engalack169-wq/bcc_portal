@@ -26,6 +26,10 @@ RUN docker-php-ext-install \
 # Enable Apache modules
 RUN a2enmod rewrite headers deflate expires
 
+# Configure Apache global settings
+RUN echo "ServerTokens Prod" >> /etc/apache2/apache2.conf && \
+    echo "ServerSignature Off" >> /etc/apache2/apache2.conf
+
 # Set PHP configurations
 RUN echo "upload_max_filesize = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo "post_max_size = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
