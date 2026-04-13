@@ -442,4 +442,3 @@ class SQLiteDatabaseWrapper {
 
 // Export for use
 // Replace: use Database or use SQLiteDatabase
-?>

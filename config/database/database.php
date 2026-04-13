@@ -211,5 +211,4 @@ if (!function_exists('get_database_instance')) {
         return Database::getInstance();
     }
 }
-?>
 

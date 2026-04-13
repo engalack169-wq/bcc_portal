@@ -207,4 +207,3 @@ function init_access_control() {
 
 // Initialize access control on include
 init_access_control();
-?>

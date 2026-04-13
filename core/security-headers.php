@@ -72,4 +72,3 @@ class SecurityHeaders {
 
 // Set security headers on include
 SecurityHeaders::setSecurityHeaders();
-?>

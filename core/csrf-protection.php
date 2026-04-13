@@ -167,4 +167,3 @@ class CSRFProtection {
 
 // Initialize CSRF protection on include
 CSRFProtection::init();
-?>

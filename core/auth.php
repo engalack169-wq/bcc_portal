@@ -331,4 +331,3 @@ function get_dashboard_url($role) {
             return '/pages/citizen-services/dashboard.php';
     }
 }
-?>
