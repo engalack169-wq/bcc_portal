@@ -17,12 +17,34 @@ if (!is_dir($db_dir)) {
     echo "✓ Created data directory\n";
 }
 
-// Check if database already exists
-if (file_exists($db_file)) {
-    echo "✓ Database already exists at: {$db_file}\n";
-} else {
-    // Create SQLite database
+// Check if database already exists and has tables
+$needsInit = true;
+if (file_exists($db_file) && filesize($db_file) > 0) {
+    // Database exists, check if it has tables
     try {
+        $pdo = new PDO('sqlite:' . $db_file);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $result = $pdo->query("SELECT name FROM sqlite_master WHERE type='table'");
+        $tables = $result->fetchAll();
+        if (!empty($tables)) {
+            echo "✓ Database already initialized with " . count($tables) . " tables\n";
+            $needsInit = false;
+        }
+        $pdo = null;
+    } catch (Exception $e) {
+        $needsInit = true;
+    }
+}
+
+if ($needsInit) {
+    // Create or reinitialize SQLite database
+    try {
+        // Delete empty database file if it exists
+        if (file_exists($db_file)) {
+            unlink($db_file);
+        }
+        
         $pdo = new PDO('sqlite:' . $db_file);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "✓ Created SQLite database\n";
