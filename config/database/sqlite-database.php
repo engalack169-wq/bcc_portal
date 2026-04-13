@@ -12,8 +12,24 @@ class SQLiteDatabase {
     private $db_path;
     
     public function __construct() {
-        $this->config = require __DIR__ . '/../app/config.php';
-        $this->connect();
+        try {
+            // Use global config if available (set by bootstrap)
+            if (isset($GLOBALS['_app_config'])) {
+                $this->config = $GLOBALS['_app_config'];
+            } else {
+                // Fallback: try to load config
+                $this->config = @include __DIR__ . '/../app/config.php';
+            }
+            
+            if (!$this->config || !is_array($this->config)) {
+                throw new Exception("Failed to load configuration");
+            }
+            
+            $this->connect();
+        } catch (Exception $e) {
+            error_log("SQLiteDatabase error: " . $e->getMessage());
+            throw $e;
+        }
     }
     
     /**

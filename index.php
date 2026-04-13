@@ -4,19 +4,8 @@
  * Home Page
  */
 
-// Error handling
-$config = require_once __DIR__ . '/config/app/config.php';
-if (!$config['app']['debug']) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', '0');
-    ini_set('log_errors', '1');
-} else {
-    error_reporting(E_ALL);
-    ini_set('display_errors', '1');
-}
-
-// Start session
-session_start();
+// Bootstrap application
+require_once __DIR__ . '/bootstrap.php';
 
 // Set page metadata
 $page_title = 'Bamenda City Council | E-Governance Platform';

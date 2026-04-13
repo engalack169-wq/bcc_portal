@@ -4,6 +4,11 @@
  * Access Control System
  */
 
+// Bootstrap application if not already done
+if (!defined('_BCC_BOOTSTRAP_LOADED')) {
+    require_once __DIR__ . '/../bootstrap.php';
+}
+
 // Include database configuration
 require_once __DIR__ . '/../config/database/database.php';
 
