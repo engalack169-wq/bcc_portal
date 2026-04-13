@@ -17,7 +17,7 @@ $page_keywords = 'policy proposal, civic engagement, community ideas, Bamenda de
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Civic Engagement', 'url' => '/stitch1/pages/civic-engagement/index.php'],
+    ['title' => 'Civic Engagement', 'url' => '/pages/civic-engagement/index.php'],
     ['title' => 'Policy Proposal', 'url' => '#']
 ];
 

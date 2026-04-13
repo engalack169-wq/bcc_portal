@@ -17,7 +17,7 @@ $page_keywords = 'emergency alert, public safety, crisis management, Bamenda eme
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Emergency', 'url' => '/stitch1/pages/emergency/index.php'],
+    ['title' => 'Emergency', 'url' => '/pages/emergency/index.php'],
     ['title' => 'Create Alert', 'url' => '#']
 ];
 

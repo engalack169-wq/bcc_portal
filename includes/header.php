@@ -92,10 +92,10 @@ if (strpos($_SERVER['PHP_SELF'], 'citizen-services') !== false) {
     <title><?php echo htmlspecialchars($page_title); ?></title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/stitch1/assets/images/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/stitch1/assets/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/stitch1/assets/images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/stitch1/assets/images/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
     
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,10 +109,10 @@ if (strpos($_SERVER['PHP_SELF'], 'citizen-services') !== false) {
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/stitch1/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     
     <!-- Main JS -->
-    <script src="/stitch1/assets/js/main.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
 
     <!-- Service Worker for PWA -->
     <script>
@@ -156,7 +156,7 @@ require_once __DIR__ . '/navigation.php';
         <div class="container">
             <ol class="breadcrumb-list">
                 <li>
-                    <a href="/stitch1/index.php" class="breadcrumb-link">
+                    <a href="/index.php" class="breadcrumb-link">
                         <span class="material-symbols-outlined">home</span>
                         <span>Home</span>
                     </a>
@@ -164,7 +164,7 @@ require_once __DIR__ . '/navigation.php';
                 <?php foreach ($breadcrumbs as $index => $crumb): ?>
                     <li>
                         <?php if ($index < count($breadcrumbs) - 1): ?>
-                            <a href="/stitch1/<?php echo ltrim($crumb['url'], '/'); ?>" class="breadcrumb-link">
+                            <a href="/<?php echo ltrim($crumb['url'], '/'); ?>" class="breadcrumb-link">
                                 <?php echo htmlspecialchars($crumb['title']); ?>
                             </a>
                         <?php else: ?>
@@ -249,7 +249,7 @@ require_once __DIR__ . '/navigation.php';
 </style>
 
 <!-- Navigation Links Manager -->
-<script src="/stitch1/assets/js/navigation.js"></script>
+<script src="/assets/js/navigation.js"></script>
 
 <!-- Enhanced Logout Script -->
 <?php if (is_authenticated()): ?>
@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.style.pointerEvents = 'none';
                 
                 // Perform logout via AJAX for smoother experience
-                fetch('/stitch1/core/auth.php?action=logout', {
+                fetch('/core/auth.php?action=logout', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .then(response => {
                     // Redirect regardless of response
-                    window.location.href = '/stitch1/pages/auth/login.php';
+                    window.location.href = '/pages/auth/login.php';
                 })
                 .catch(error => {
                     // Fallback to direct navigation if AJAX fails

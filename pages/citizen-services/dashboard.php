@@ -17,7 +17,7 @@ $page_keywords = 'citizen dashboard, personal dashboard, service management, Bam
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Home', 'url' => '/stitch1/index.php'],
+    ['title' => 'Home', 'url' => '/index.php'],
     ['title' => 'Dashboard', 'url' => '#']
 ];
 

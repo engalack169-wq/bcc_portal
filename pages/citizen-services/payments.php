@@ -1098,7 +1098,7 @@ document.getElementById('onlinePaymentForm').addEventListener('submit', function
         paymentMethod: document.querySelector('input[name="paymentMethod"]:checked')?.value || 'mobile'
     };
 
-    fetch('/stitch1/core/process-payment.php', {
+    fetch('/core/process-payment.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)

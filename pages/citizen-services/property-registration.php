@@ -17,8 +17,8 @@ $page_keywords = 'property registration, land registry, real estate, Bamenda pro
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Services', 'url' => '/stitch1/pages/citizen-services/services.php'],
-    ['title' => 'Property Registry', 'url' => '/stitch1/pages/citizen-services/property-registry.php'],
+    ['title' => 'Services', 'url' => '/pages/citizen-services/services.php'],
+    ['title' => 'Property Registry', 'url' => '/pages/citizen-services/property-registry.php'],
     ['title' => 'Registration', 'url' => '#']
 ];
 

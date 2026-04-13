@@ -37,305 +37,305 @@ $user_name = get_user_display_name();
 $user_email = get_user_email();
 
 // Determine dashboard URL based on user role
-$dashboard_url = '/stitch1/pages/citizen-services/dashboard.php';
+$dashboard_url = '/pages/citizen-services/dashboard.php';
 if ($user_role === 'admin') {
-    $dashboard_url = '/stitch1/pages/administration/dashboard.php';
+    $dashboard_url = '/pages/administration/dashboard.php';
 } elseif ($user_role === 'staff') {
-    $dashboard_url = '/stitch1/pages/administration/staff-portal.php';
+    $dashboard_url = '/pages/administration/staff-portal.php';
 }
 
 // Define navigation structure
 $nav_items = [
     'home' => [
         'title' => 'Home',
-        'url' => '/stitch1/index.php',
+        'url' => '/index.php',
         'icon' => 'home',
         'section' => 'main'
     ],
     'services' => [
         'title' => 'Services',
-        'url' => '/stitch1/pages/citizen-services/services.php',
+        'url' => '/pages/citizen-services/services.php',
         'icon' => 'gavel',
         'section' => 'citizen-services',
         'dropdown' => [
             'business_license' => [
                 'title' => 'Business License',
-                'url' => '/stitch1/pages/citizen-services/business-license.php',
+                'url' => '/pages/citizen-services/business-license.php',
                 'icon' => 'business'
             ],
             'permits' => [
                 'title' => 'Permits & Licenses',
-                'url' => '/stitch1/pages/citizen-services/permits.php',
+                'url' => '/pages/citizen-services/permits.php',
                 'icon' => 'description'
             ],
             'property_registry' => [
                 'title' => 'Property Registry',
-                'url' => '/stitch1/pages/citizen-services/property-registry.php',
+                'url' => '/pages/citizen-services/property-registry.php',
                 'icon' => 'apartment'
             ],
             'tax_portal' => [
                 'title' => 'Tax Portal',
-                'url' => '/stitch1/pages/citizen-services/tax-portal.php',
+                'url' => '/pages/citizen-services/tax-portal.php',
                 'icon' => 'receipt'
             ],
             'payments' => [
                 'title' => 'Online Payments',
-                'url' => '/stitch1/pages/citizen-services/payments.php',
+                'url' => '/pages/citizen-services/payments.php',
                 'icon' => 'payments'
             ],
             'service_history' => [
                 'title' => 'Service History',
-                'url' => '/stitch1/pages/citizen-services/service-history.php',
+                'url' => '/pages/citizen-services/service-history.php',
                 'icon' => 'history'
             ],
             'directory' => [
                 'title' => 'City Directory',
-                'url' => '/stitch1/pages/citizen-services/directory.php',
+                'url' => '/pages/citizen-services/directory.php',
                 'icon' => 'contacts'
             ],
             'events' => [
                 'title' => 'City Events',
-                'url' => '/stitch1/pages/citizen-services/events.php',
+                'url' => '/pages/citizen-services/events.php',
                 'icon' => 'event'
             ],
             'business_license_app' => [
                 'title' => 'License Application',
-                'url' => '/stitch1/pages/citizen-services/business-license-application.php',
+                'url' => '/pages/citizen-services/business-license-application.php',
                 'icon' => 'description'
             ],
             'education' => [
                 'title' => 'Civic Education',
-                'url' => '/stitch1/pages/citizen-services/education.php',
+                'url' => '/pages/citizen-services/education.php',
                 'icon' => 'school'
             ],
             'health' => [
                 'title' => 'Health Services',
-                'url' => '/stitch1/pages/citizen-services/health.php',
+                'url' => '/pages/citizen-services/health.php',
                 'icon' => 'medical_services'
             ],
             'infrastructure' => [
                 'title' => 'Infrastructure',
-                'url' => '/stitch1/pages/citizen-services/infrastructure.php',
+                'url' => '/pages/citizen-services/infrastructure.php',
                 'icon' => 'construction'
             ],
             'transport' => [
                 'title' => 'Public Transport',
-                'url' => '/stitch1/pages/citizen-services/transport.php',
+                'url' => '/pages/citizen-services/transport.php',
                 'icon' => 'directions_bus'
             ],
             'sanitation' => [
                 'title' => 'Sanitation',
-                'url' => '/stitch1/pages/citizen-services/sanitation.php',
+                'url' => '/pages/citizen-services/sanitation.php',
                 'icon' => 'cleaning_services'
             ]
         ]
     ],
     'civic' => [
         'title' => 'Civic',
-        'url' => '/stitch1/pages/civic-engagement/index.php',
+        'url' => '/pages/civic-engagement/index.php',
         'icon' => 'diversity_3',
         'section' => 'civic-engagement',
         'dropdown' => [
             'youth_council' => [
                 'title' => 'Youth Council',
-                'url' => '/stitch1/pages/youth/youth-council.php',
+                'url' => '/pages/youth/youth-council.php',
                 'icon' => 'school'
             ],
             'consultations' => [
                 'title' => 'Public Consultations',
-                'url' => '/stitch1/pages/civic-engagement/consultations.php',
+                'url' => '/pages/civic-engagement/consultations.php',
                 'icon' => 'how_to_vote'
             ],
             'policy_proposal' => [
                 'title' => 'Policy Proposal',
-                'url' => '/stitch1/pages/civic-engagement/policy-proposal.php',
+                'url' => '/pages/civic-engagement/policy-proposal.php',
                 'icon' => 'lightbulb'
             ],
             'polls' => [
                 'title' => 'Public Polls',
-                'url' => '/stitch1/pages/civic-engagement/polls.php',
+                'url' => '/pages/civic-engagement/polls.php',
                 'icon' => 'poll'
             ],
             'volunteer' => [
                 'title' => 'Volunteer',
-                'url' => '/stitch1/pages/civic-engagement/volunteer.php',
+                'url' => '/pages/civic-engagement/volunteer.php',
                 'icon' => 'volunteer_activism'
             ],
             'town_hall' => [
                 'title' => 'Town Hall Meetings',
-                'url' => '/stitch1/pages/civic-engagement/town-hall.php',
+                'url' => '/pages/civic-engagement/town-hall.php',
                 'icon' => 'groups'
             ],
             'archives' => [
                 'title' => 'Council Archives',
-                'url' => '/stitch1/pages/civic-engagement/archives.php',
+                'url' => '/pages/civic-engagement/archives.php',
                 'icon' => 'archive'
             ],
             'live_stream' => [
                 'title' => 'Live Meetings',
-                'url' => '/stitch1/pages/civic-engagement/live-stream.php',
+                'url' => '/pages/civic-engagement/live-stream.php',
                 'icon' => 'live_tv'
             ],
             'transparency' => [
                 'title' => 'Transparency Hub',
-                'url' => '/stitch1/pages/civic-engagement/transparency.php',
+                'url' => '/pages/civic-engagement/transparency.php',
                 'icon' => 'visibility'
             ]
         ]
     ],
     'emergency' => [
         'title' => 'Emergency',
-        'url' => '/stitch1/pages/emergency/index.php',
+        'url' => '/pages/emergency/index.php',
         'icon' => 'emergency_home',
         'section' => 'emergency',
         'dropdown' => [
             'alerts' => [
                 'title' => 'Emergency Alerts',
-                'url' => '/stitch1/pages/emergency/alerts.php',
+                'url' => '/pages/emergency/alerts.php',
                 'icon' => 'notifications_active'
             ],
             'create_alert' => [
                 'title' => 'Create Alert',
-                'url' => '/stitch1/pages/emergency/create-alert.php',
+                'url' => '/pages/emergency/create-alert.php',
                 'icon' => 'add_alert'
             ],
             'crisis' => [
                 'title' => 'Crisis Management',
-                'url' => '/stitch1/pages/emergency/crisis.php',
+                'url' => '/pages/emergency/crisis.php',
                 'icon' => 'crisis_alert'
             ],
             'management' => [
                 'title' => 'Crisis Management',
-                'url' => '/stitch1/pages/emergency/management.php',
+                'url' => '/pages/emergency/management.php',
                 'icon' => 'health_and_safety'
             ],
             'recovery' => [
                 'title' => 'Recovery Support',
-                'url' => '/stitch1/pages/emergency/recovery.php',
+                'url' => '/pages/emergency/recovery.php',
                 'icon' => 'healing'
             ],
             'resources' => [
                 'title' => 'Safety Resources',
-                'url' => '/stitch1/pages/emergency/resources.php',
+                'url' => '/pages/emergency/resources.php',
                 'icon' => 'medical_information'
             ]
         ]
     ],
     'youth' => [
         'title' => 'Youth',
-        'url' => '/stitch1/pages/youth/index.php',
+        'url' => '/pages/youth/index.php',
         'icon' => 'school',
         'section' => 'youth',
         'dropdown' => [
             'youth_council' => [
                 'title' => 'Youth Council',
-                'url' => '/stitch1/pages/youth/youth-council.php',
+                'url' => '/pages/youth/youth-council.php',
                 'icon' => 'groups'
             ],
             'youth_application' => [
                 'title' => 'Council Application',
-                'url' => '/stitch1/pages/youth/youth-council-application.php',
+                'url' => '/pages/youth/youth-council-application.php',
                 'icon' => 'person_add'
             ],
             'employment' => [
                 'title' => 'Employment Portal',
-                'url' => '/stitch1/pages/youth/employment.php',
+                'url' => '/pages/youth/employment.php',
                 'icon' => 'work'
             ],
             'programs' => [
                 'title' => 'Youth Programs',
-                'url' => '/stitch1/pages/youth/programs.php',
+                'url' => '/pages/youth/programs.php',
                 'icon' => 'emoji_events'
             ],
             'grants' => [
                 'title' => 'Grant Opportunities',
-                'url' => '/stitch1/pages/youth/grants.php',
+                'url' => '/pages/youth/grants.php',
                 'icon' => 'savings'
             ],
             'leadership' => [
                 'title' => 'Leadership Training',
-                'url' => '/stitch1/pages/youth/leadership.php',
+                'url' => '/pages/youth/leadership.php',
                 'icon' => 'psychology'
             ],
             'entrepreneurship' => [
                 'title' => 'Entrepreneurship',
-                'url' => '/stitch1/pages/youth/entrepreneurship.php',
+                'url' => '/pages/youth/entrepreneurship.php',
                 'icon' => 'store'
             ]
         ]
     ],
     'public_services' => [
         'title' => 'Public Services',
-        'url' => '/stitch1/pages/public-services/index.php',
+        'url' => '/pages/public-services/index.php',
         'icon' => 'public',
         'section' => 'public-services',
         'dropdown' => [
             'civil_status' => [
                 'title' => 'Civil Status Hub',
-                'url' => '/stitch1/pages/public-services/civil-status.php',
+                'url' => '/pages/public-services/civil-status.php',
                 'icon' => 'badge'
             ],
             'digital_id' => [
                 'title' => 'Digital ID Wallet',
-                'url' => '/stitch1/pages/public-services/digital-id.php',
+                'url' => '/pages/public-services/digital-id.php',
                 'icon' => 'credit_card'
             ],
             'document_vault' => [
                 'title' => 'Document Vault',
-                'url' => '/stitch1/pages/public-services/document-vault.php',
+                'url' => '/pages/public-services/document-vault.php',
                 'icon' => 'folder'
             ],
             'public_health' => [
                 'title' => 'Public Health Hub',
-                'url' => '/stitch1/pages/public-services/health.php',
+                'url' => '/pages/public-services/health.php',
                 'icon' => 'health_and_safety'
             ],
             'environmental' => [
                 'title' => 'Environmental Zones',
-                'url' => '/stitch1/pages/public-services/environmental.php',
+                'url' => '/pages/public-services/environmental.php',
                 'icon' => 'park'
             ],
             'city_map' => [
                 'title' => 'Interactive City Map',
-                'url' => '/stitch1/pages/public-services/city-map.php',
+                'url' => '/pages/public-services/city-map.php',
                 'icon' => 'map'
             ],
             'tenders' => [
                 'title' => 'Public Tenders',
-                'url' => '/stitch1/pages/public-services/tenders.php',
+                'url' => '/pages/public-services/tenders.php',
                 'icon' => 'gavel'
             ],
             'projects' => [
                 'title' => 'Projects Showcase',
-                'url' => '/stitch1/pages/public-services/projects.php',
+                'url' => '/pages/public-services/projects.php',
                 'icon' => 'view_in_ar'
             ]
         ]
     ],
     'business' => [
         'title' => 'Business',
-        'url' => '/stitch1/pages/business/index.php',
+        'url' => '/pages/business/index.php',
         'icon' => 'business',
         'section' => 'business',
         'dropdown' => [
             'market_trader' => [
                 'title' => 'Market Trader Portal',
-                'url' => '/stitch1/pages/business/market-trader.php',
+                'url' => '/pages/business/market-trader.php',
                 'icon' => 'storefront'
             ],
             'analytics' => [
                 'title' => 'Business Analytics',
-                'url' => '/stitch1/pages/business/analytics.php',
+                'url' => '/pages/business/analytics.php',
                 'icon' => 'analytics'
             ],
             'project_management' => [
                 'title' => 'Project Management',
-                'url' => '/stitch1/pages/business/project-management.php',
+                'url' => '/pages/business/project-management.php',
                 'icon' => 'assignment'
             ],
             'urban_planning' => [
                 'title' => 'Urban Planning Permits',
-                'url' => '/stitch1/pages/business/urban-planning.php',
+                'url' => '/pages/business/urban-planning.php',
                 'icon' => 'location_city'
             ]
         ]
@@ -352,47 +352,47 @@ if ($is_logged_in && $user_role === 'admin') {
         'dropdown' => [
             'dashboard' => [
                 'title' => 'Dashboard',
-                'url' => '/stitch1/pages/administration/dashboard.php',
+                'url' => '/pages/administration/dashboard.php',
                 'icon' => 'dashboard'
             ],
             'staff_portal' => [
                 'title' => 'Staff Portal',
-                'url' => '/stitch1/pages/administration/staff-portal.php',
+                'url' => '/pages/administration/staff-portal.php',
                 'icon' => 'badge'
             ],
             'analytics' => [
                 'title' => 'Analytics & Reports',
-                'url' => '/stitch1/pages/administration/analytics.php',
+                'url' => '/pages/administration/analytics.php',
                 'icon' => 'analytics'
             ],
             'user_management' => [
                 'title' => 'User Management',
-                'url' => '/stitch1/pages/administration/users.php',
+                'url' => '/pages/administration/users.php',
                 'icon' => 'people'
             ],
             'staff_tasks' => [
                 'title' => 'Staff Tasks',
-                'url' => '/stitch1/pages/administration/staff-tasks.php',
+                'url' => '/pages/administration/staff-tasks.php',
                 'icon' => 'assignment_turned_in'
             ],
             'attendance' => [
                 'title' => 'Staff Attendance',
-                'url' => '/stitch1/pages/administration/attendance.php',
+                'url' => '/pages/administration/attendance.php',
                 'icon' => 'event_available'
             ],
             'settings' => [
                 'title' => 'System Settings',
-                'url' => '/stitch1/pages/administration/settings.php',
+                'url' => '/pages/administration/settings.php',
                 'icon' => 'settings'
             ],
             'archives' => [
                 'title' => 'Archives',
-                'url' => '/stitch1/pages/administration/archives.php',
+                'url' => '/pages/administration/archives.php',
                 'icon' => 'archive'
             ],
             'backup' => [
                 'title' => 'Backup & Restore',
-                'url' => '/stitch1/pages/administration/backup.php',
+                'url' => '/pages/administration/backup.php',
                 'icon' => 'backup'
             ]
         ]
@@ -407,17 +407,17 @@ if ($is_logged_in && $user_role === 'admin') {
         'dropdown' => [
             'staff_portal' => [
                 'title' => 'Staff Portal',
-                'url' => '/stitch1/pages/administration/staff-portal.php',
+                'url' => '/pages/administration/staff-portal.php',
                 'icon' => 'badge'
             ],
             'staff_tasks' => [
                 'title' => 'My Tasks',
-                'url' => '/stitch1/pages/administration/staff-tasks.php',
+                'url' => '/pages/administration/staff-tasks.php',
                 'icon' => 'assignment_turned_in'
             ],
             'attendance' => [
                 'title' => 'Attendance',
-                'url' => '/stitch1/pages/administration/attendance.php',
+                'url' => '/pages/administration/attendance.php',
                 'icon' => 'event_available'
             ]
         ]
@@ -452,9 +452,9 @@ function is_active($item_key, $current_page) {
 <header class="navbar">
     <div class="navbar-container">
         <!-- Logo and Brand -->
-        <a href="/stitch1/index.php" class="navbar-brand">
+        <a href="/index.php" class="navbar-brand">
             <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden">
-                <img src="/stitch1/assets/images/bamenda-crest.png" alt="Bamenda City Crest" 
+                <img src="/assets/images/bamenda-crest.png" alt="Bamenda City Crest" 
                      data-alt="Traditional heraldic crest of Bamenda City Council with green and gold accents on a clean white background">
             </div>
             <span>Bamenda City Council</span>
@@ -509,7 +509,7 @@ function is_active($item_key, $current_page) {
                         <div class="dropdown-menu user-dropdown">
                             <div class="user-info">
                                 <div class="user-avatar">
-                                <img src="/stitch1/assets/images/default-profile.jpg" alt="User Profile" class="nav-profile-image">
+                                <img src="/assets/images/default-profile.jpg" alt="User Profile" class="nav-profile-image">
                             </div>
                                 <div class="user-details">
                                     <div class="user-name-full"><?php echo htmlspecialchars($user_name); ?></div>
@@ -522,20 +522,20 @@ function is_active($item_key, $current_page) {
                                 <span class="material-symbols-outlined">dashboard</span>
                                 Dashboard
                             </a>
-                            <a href="/stitch1/pages/citizen-services/profile.php" class="dropdown-item">
+                            <a href="/pages/citizen-services/profile.php" class="dropdown-item">
                                 <span class="material-symbols-outlined">person</span>
                                 Profile
                             </a>
-                            <a href="/stitch1/pages/citizen-services/settings.php" class="dropdown-item">
+                            <a href="/pages/citizen-services/settings.php" class="dropdown-item">
                                 <span class="material-symbols-outlined">settings</span>
                                 Settings
                             </a>
-                            <a href="/stitch1/pages/citizen-services/notifications.php" class="dropdown-item">
+                            <a href="/pages/citizen-services/notifications.php" class="dropdown-item">
                                 <span class="material-symbols-outlined">notifications</span>
                                 Notifications
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="/stitch1/core/auth.php?action=logout" class="dropdown-item logout-item">
+                            <a href="/core/auth.php?action=logout" class="dropdown-item logout-item">
                                 <span class="material-symbols-outlined">logout</span>
                                 Logout
                             </a>
@@ -543,11 +543,11 @@ function is_active($item_key, $current_page) {
                     </div>
                 <?php else: ?>
                     <!-- Login/Register buttons -->
-                    <a href="/stitch1/pages/auth/login.php" class="btn btn-outline btn-sm">
+                    <a href="/pages/auth/login.php" class="btn btn-outline btn-sm">
                         <span class="material-symbols-outlined">login</span>
                         Login
                     </a>
-                    <a href="/stitch1/pages/auth/register.php" class="btn btn-primary btn-sm">
+                    <a href="/pages/auth/register.php" class="btn btn-primary btn-sm">
                         <span class="material-symbols-outlined">person_add</span>
                         Register
                     </a>
@@ -567,7 +567,7 @@ function is_active($item_key, $current_page) {
     <div class="mobile-nav-header">
         <div class="navbar-brand">
             <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden">
-                <img src="/stitch1/assets/images/bamenda-crest.png" alt="Bamenda City Crest">
+                <img src="/assets/images/bamenda-crest.png" alt="Bamenda City Crest">
             </div>
             <span>Bamenda City Council</span>
         </div>
@@ -615,7 +615,7 @@ function is_active($item_key, $current_page) {
                 <!-- Logged in user section -->
                 <div class="mobile-user-info">
                     <div class="mobile-user-avatar">
-                        <img src="/stitch1/assets/images/default-profile.jpg" alt="User Profile" class="mobile-profile-image">
+                        <img src="/assets/images/default-profile.jpg" alt="User Profile" class="mobile-profile-image">
                     </div>
                     <div class="mobile-user-details">
                         <div class="mobile-user-name"><?php echo htmlspecialchars($user_name); ?></div>
@@ -626,25 +626,25 @@ function is_active($item_key, $current_page) {
                     <span class="material-symbols-outlined">dashboard</span>
                     Dashboard
                 </a>
-                <a href="/stitch1/pages/citizen-services/profile.php" class="mobile-nav-link">
+                <a href="/pages/citizen-services/profile.php" class="mobile-nav-link">
                     <span class="material-symbols-outlined">person</span>
                     Profile
                 </a>
-                <a href="/stitch1/pages/citizen-services/settings.php" class="mobile-nav-link">
+                <a href="/pages/citizen-services/settings.php" class="mobile-nav-link">
                     <span class="material-symbols-outlined">settings</span>
                     Settings
                 </a>
-                <a href="/stitch1/core/auth.php?action=logout" class="mobile-nav-link mobile-logout">
+                <a href="/core/auth.php?action=logout" class="mobile-nav-link mobile-logout">
                     <span class="material-symbols-outlined">logout</span>
                     Logout
                 </a>
             <?php else: ?>
                 <!-- Login/Register section -->
-                <a href="/stitch1/pages/auth/login.php" class="mobile-nav-link">
+                <a href="/pages/auth/login.php" class="mobile-nav-link">
                     <span class="material-symbols-outlined">login</span>
                     Login
                 </a>
-                <a href="/stitch1/pages/auth/register.php" class="mobile-nav-link">
+                <a href="/pages/auth/register.php" class="mobile-nav-link">
                     <span class="material-symbols-outlined">person_add</span>
                     Register
                 </a>
@@ -657,31 +657,31 @@ function is_active($item_key, $current_page) {
 <nav class="bottom-nav">
     <ul class="bottom-nav-list">
         <li>
-            <a href="/stitch1/index.php" class="bottom-nav-item <?php echo $current_page === 'index.php' ? 'active' : ''; ?>">
+            <a href="/index.php" class="bottom-nav-item <?php echo $current_page === 'index.php' ? 'active' : ''; ?>">
                 <span class="material-symbols-outlined">home</span>
                 <span>Home</span>
             </a>
         </li>
         <li>
-            <a href="/stitch1/pages/citizen-services/services.php" class="bottom-nav-item <?php echo $current_section === 'citizen-services' ? 'active' : ''; ?>">
+            <a href="/pages/citizen-services/services.php" class="bottom-nav-item <?php echo $current_section === 'citizen-services' ? 'active' : ''; ?>">
                 <span class="material-symbols-outlined">gavel</span>
                 <span>Services</span>
             </a>
         </li>
         <li>
-            <a href="/stitch1/pages/civic-engagement/index.php" class="bottom-nav-item <?php echo $current_section === 'civic-engagement' ? 'active' : ''; ?>">
+            <a href="/pages/civic-engagement/index.php" class="bottom-nav-item <?php echo $current_section === 'civic-engagement' ? 'active' : ''; ?>">
                 <span class="material-symbols-outlined">diversity_3</span>
                 <span>Civic</span>
             </a>
         </li>
         <li>
-            <a href="/stitch1/pages/emergency/index.php" class="bottom-nav-item <?php echo $current_section === 'emergency' ? 'active' : ''; ?>">
+            <a href="/pages/emergency/index.php" class="bottom-nav-item <?php echo $current_section === 'emergency' ? 'active' : ''; ?>">
                 <span class="material-symbols-outlined">emergency_home</span>
                 <span>Emergency</span>
             </a>
         </li>
         <li>
-            <a href="/stitch1/pages/youth/index.php" class="bottom-nav-item <?php echo $current_section === 'youth' ? 'active' : ''; ?>">
+            <a href="/pages/youth/index.php" class="bottom-nav-item <?php echo $current_section === 'youth' ? 'active' : ''; ?>">
                 <span class="material-symbols-outlined">school</span>
                 <span>Youth</span>
             </a>

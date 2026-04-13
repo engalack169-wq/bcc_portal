@@ -78,7 +78,7 @@ function get_user_email() {
  */
 function require_authentication() {
     if (!is_authenticated()) {
-        header('Location: /stitch1/pages/auth/login.php');
+        header('Location: /pages/auth/login.php');
         exit;
     }
 }
@@ -109,7 +109,7 @@ function require_role($required_role) {
     $user_level = $role_hierarchy[$user_role] ?? 0;
 
     if ($user_level < $required_level) {
-        header('Location: /stitch1/pages/auth/unauthorized.php');
+        header('Location: /pages/auth/unauthorized.php');
         exit;
     }
 }
@@ -142,7 +142,7 @@ function has_role($role) {
  */
 function logout() {
     session_destroy();
-    header('Location: /stitch1/pages/auth/login.php');
+    header('Location: /pages/auth/login.php');
     exit;
 }
 

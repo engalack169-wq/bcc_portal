@@ -226,7 +226,7 @@ require_once __DIR__ . '/../../includes/header.php';
                 <div class="card-content">
                     <div class="profile-section">
                         <div class="profile-avatar">
-                            <img src="/stitch1/assets/images/staff-avatar-placeholder.png" alt="Staff Profile">
+                            <img src="/assets/images/staff-avatar-placeholder.png" alt="Staff Profile">
                         </div>
                         <div class="profile-info">
                             <h4 class="staff-name">John Doe</h4>

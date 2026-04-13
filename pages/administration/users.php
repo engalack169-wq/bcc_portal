@@ -278,7 +278,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="User">
+                                        <img src="/assets/images/user-avatar-placeholder.png" alt="User">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">John Doe</div>
@@ -308,7 +308,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="User">
+                                        <img src="/assets/images/user-avatar-placeholder.png" alt="User">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">Jane Smith</div>
@@ -338,7 +338,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="User">
+                                        <img src="/assets/images/user-avatar-placeholder.png" alt="User">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">Michael Johnson</div>
@@ -368,7 +368,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="User">
+                                        <img src="/assets/images/user-avatar-placeholder.png" alt="User">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">Sarah Williams</div>
@@ -398,7 +398,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <td>
                                 <div class="user-info">
                                     <div class="user-avatar">
-                                        <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="User">
+                                        <img src="/assets/images/user-avatar-placeholder.png" alt="User">
                                     </div>
                                     <div class="user-details">
                                         <div class="user-name">Robert Brown</div>

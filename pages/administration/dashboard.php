@@ -1063,7 +1063,7 @@ setInterval(function() {
 }, 60000); // Refresh every minute
 
 function refreshDashboardData() {
-    fetch('/stitch1/api/dashboard-stats.php')
+    fetch('/api/dashboard-stats.php')
         .then(response => response.json())
         .then(res => {
             if (res.success && res.data) {

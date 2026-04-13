@@ -111,7 +111,7 @@ function upload_document($user_id, $upload_dir) {
             VALUES (?, ?, ?, ?, ?, 'pending')
         ");
         
-        $relative_path = '/stitch1/uploads/documents/' . $filename;
+        $relative_path = '/uploads/documents/' . $filename;
         $stmt->bind_param("isssi", $user_id, $document_name, $document_type, $relative_path, $file['size']);
         
         if ($stmt->execute()) {
@@ -198,7 +198,7 @@ function upload_avatar($user_id, $upload_dir) {
         resize_image($file_path, 300, 300);
         
         // Store in database
-        $relative_path = '/stitch1/uploads/avatars/' . $filename;
+        $relative_path = '/uploads/avatars/' . $filename;
         
         // Create user_profiles table if not exists
         $db->getConnection()->query("

@@ -168,7 +168,7 @@ require_once __DIR__ . '/../../includes/header.php';
         <div class="markets-grid">
             <div class="market-card">
                 <div class="market-image">
-                    <img src="/stitch1/assets/images/central-market.jpg" alt="Central Market">
+                    <img src="/assets/images/central-market.jpg" alt="Central Market">
                 </div>
                 <div class="market-content">
                     <h3 class="market-title">Central Market</h3>
@@ -195,7 +195,7 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
             <div class="market-card">
                 <div class="market-image">
-                    <img src="/stitch1/assets/images/district-market.jpg" alt="District Market">
+                    <img src="/assets/images/district-market.jpg" alt="District Market">
                 </div>
                 <div class="market-content">
                     <h3 class="market-title">North District Market</h3>

@@ -11,7 +11,7 @@ $page_keywords = 'public consultations, civic engagement, citizen participation,
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Civic', 'url' => '/stitch1/pages/civic-engagement/index.php'],
+    ['title' => 'Civic', 'url' => '/pages/civic-engagement/index.php'],
     ['title' => 'Public Consultations', 'url' => '#']
 ];
 

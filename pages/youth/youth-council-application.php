@@ -17,8 +17,8 @@ $page_keywords = 'youth council application, civic leadership, Bamenda youth, co
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Youth', 'url' => '/stitch1/pages/youth/index.php'],
-    ['title' => 'Youth Council', 'url' => '/stitch1/pages/youth/youth-council.php'],
+    ['title' => 'Youth', 'url' => '/pages/youth/index.php'],
+    ['title' => 'Youth Council', 'url' => '/pages/youth/youth-council.php'],
     ['title' => 'Application', 'url' => '#']
 ];
 

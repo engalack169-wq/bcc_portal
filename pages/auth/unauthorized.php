@@ -12,11 +12,11 @@ $page_description = 'You do not have permission to view this page.';
 require_once __DIR__ . '/../../includes/header.php';
 
 $user_role = get_user_role();
-$dashboard_url = '/stitch1/pages/citizen-services/dashboard.php';
+$dashboard_url = '/pages/citizen-services/dashboard.php';
 if ($user_role === 'admin') {
-    $dashboard_url = '/stitch1/pages/administration/dashboard.php';
+    $dashboard_url = '/pages/administration/dashboard.php';
 } elseif ($user_role === 'staff') {
-    $dashboard_url = '/stitch1/pages/administration/staff-portal.php';
+    $dashboard_url = '/pages/administration/staff-portal.php';
 }
 ?>
 
@@ -43,12 +43,12 @@ if ($user_role === 'admin') {
                     <span class="material-symbols-outlined">dashboard</span>
                     Go to My Dashboard
                 </a>
-                <a href="/stitch1/index.php" class="btn btn-outline">
+                <a href="/index.php" class="btn btn-outline">
                     <span class="material-symbols-outlined">home</span>
                     Return to Home
                 </a>
                 <?php if (!is_authenticated()): ?>
-                <a href="/stitch1/pages/auth/login.php" class="btn btn-secondary">
+                <a href="/pages/auth/login.php" class="btn btn-secondary">
                     <span class="material-symbols-outlined">login</span>
                     Sign In
                 </a>

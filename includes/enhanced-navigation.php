@@ -11,49 +11,49 @@ class EnhancedNavigation {
     private $navItems = [
         'home' => [
             'title' => 'Home',
-            'url' => '/stitch1/index.php',
+            'url' => '/index.php',
             'icon' => 'home',
             'section' => 'main'
         ],
         'services' => [
             'title' => 'Services',
-            'url' => '/stitch1/pages/citizen-services/services.php',
+            'url' => '/pages/citizen-services/services.php',
             'icon' => 'gavel',
             'section' => 'citizen-services',
             'dropdown' => [
                 'citizen_services' => [
                     'title' => 'Citizen Services',
-                    'url' => '/stitch1/pages/citizen-services/services.php',
+                    'url' => '/pages/citizen-services/services.php',
                     'icon' => 'gavel',
                     'description' => 'Access permits, licenses, and public services'
                 ],
                 'business_services' => [
                     'title' => 'Business Services',
-                    'url' => '/stitch1/pages/business/index.php',
+                    'url' => '/pages/business/index.php',
                     'icon' => 'business',
                     'description' => 'Business licensing, market access, and development'
                 ],
                 'youth_programs' => [
                     'title' => 'Youth Programs',
-                    'url' => '/stitch1/pages/youth/index.php',
+                    'url' => '/pages/youth/index.php',
                     'icon' => 'school',
                     'description' => 'Youth council, employment, and skill development'
                 ],
                 'emergency_services' => [
                     'title' => 'Emergency Services',
-                    'url' => '/stitch1/pages/emergency/index.php',
+                    'url' => '/pages/emergency/index.php',
                     'icon' => 'emergency',
                     'description' => 'Emergency alerts, contacts, and resources'
                 ],
                 'public_services' => [
                     'title' => 'Public Services',
-                    'url' => '/stitch1/pages/public-services/civil-status.php',
+                    'url' => '/pages/public-services/civil-status.php',
                     'icon' => 'account_balance',
                     'description' => 'Civil status, certificates, and notary services'
                 ],
                 'civic_engagement' => [
                     'title' => 'Civic Engagement',
-                    'url' => '/stitch1/pages/civic-engagement/consultations.php',
+                    'url' => '/pages/civic-engagement/consultations.php',
                     'icon' => 'groups',
                     'description' => 'Community forums, consultations, and participation'
                 ]
@@ -61,20 +61,20 @@ class EnhancedNavigation {
         ],
         'payments' => [
             'title' => 'Payments',
-            'url' => '/stitch1/pages/citizen-services/payments.php',
+            'url' => '/pages/citizen-services/payments.php',
             'icon' => 'payments',
             'section' => 'citizen-services'
         ],
         'dashboard' => [
             'title' => 'Dashboard',
-            'url' => '/stitch1/pages/citizen-services/dashboard.php',
+            'url' => '/pages/citizen-services/dashboard.php',
             'icon' => 'dashboard',
             'section' => 'user',
             'requires_auth' => true
         ],
         'profile' => [
             'title' => 'Profile',
-            'url' => '/stitch1/pages/citizen-services/profile.php',
+            'url' => '/pages/citizen-services/profile.php',
             'icon' => 'person',
             'section' => 'user',
             'requires_auth' => true
@@ -90,7 +90,7 @@ class EnhancedNavigation {
             <div class="nav-container">
                 <!-- Brand Logo -->
                 <div class="nav-brand">
-                    <a href="/stitch1/index.php" class="brand-link">
+                    <a href="/index.php" class="brand-link">
                         <div class="brand-icon">
                             <?php echo render_icon('account_balance', '', '32px'); ?>
                         </div>
@@ -224,16 +224,16 @@ class EnhancedNavigation {
                                         </div>
                                     </div>
                                     <div class="profile-menu">
-                                        <a href="/stitch1/pages/citizen-services/profile.php" class="profile-menu-item">
+                                        <a href="/pages/citizen-services/profile.php" class="profile-menu-item">
                                             <?php echo render_icon('person', '', '20px'); ?>
                                             <span>Profile</span>
                                         </a>
-                                        <a href="/stitch1/pages/citizen-services/settings.php" class="profile-menu-item">
+                                        <a href="/pages/citizen-services/settings.php" class="profile-menu-item">
                                             <?php echo render_icon('settings', '', '20px'); ?>
                                             <span>Settings</span>
                                         </a>
                                         <div class="profile-divider"></div>
-                                        <a href="/stitch1/pages/auth/logout.php" class="profile-menu-item logout">
+                                        <a href="/pages/auth/logout.php" class="profile-menu-item logout">
                                             <?php echo render_icon('logout', '', '20px'); ?>
                                             <span>Sign Out</span>
                                         </a>
@@ -243,11 +243,11 @@ class EnhancedNavigation {
                     <?php else: ?>
                         <!-- Auth Buttons -->
                         <div class="nav-actions">
-                            <a href="/stitch1/pages/auth/login.php" class="btn btn-outline btn-sm">
+                            <a href="/pages/auth/login.php" class="btn btn-outline btn-sm">
                                 <?php echo render_icon('login', '', '16px'); ?>
                                 Sign In
                             </a>
-                            <a href="/stitch1/pages/auth/register.php" class="btn btn-primary btn-sm">
+                            <a href="/pages/auth/register.php" class="btn btn-primary btn-sm">
                                 <?php echo render_icon('person_add', '', '16px'); ?>
                                 Create Account
                             </a>
@@ -330,29 +330,29 @@ class EnhancedNavigation {
             <?php if ($isAuthenticated): ?>
                 <div class="mobile-nav-divider"></div>
                 <div class="mobile-nav-actions">
-                    <a href="/stitch1/pages/citizen-services/dashboard.php" class="mobile-nav-btn mobile-nav-btn-primary">
+                    <a href="/pages/citizen-services/dashboard.php" class="mobile-nav-btn mobile-nav-btn-primary">
                         <?php echo render_icon('dashboard', '', '20px'); ?>
                         <span>Dashboard</span>
                     </a>
-                    <a href="/stitch1/pages/citizen-services/profile.php" class="mobile-nav-btn mobile-nav-btn-secondary">
+                    <a href="/pages/citizen-services/profile.php" class="mobile-nav-btn mobile-nav-btn-secondary">
                         <?php echo render_icon('person', '', '20px'); ?>
                         <span>Profile</span>
                     </a>
                 </div>
                 <div class="mobile-nav-divider"></div>
                 <div class="mobile-nav-logout">
-                    <a href="/stitch1/pages/auth/logout.php" class="mobile-nav-btn mobile-nav-btn-danger">
+                    <a href="/pages/auth/logout.php" class="mobile-nav-btn mobile-nav-btn-danger">
                         <?php echo render_icon('logout', '', '20px'); ?>
                         <span>Sign Out</span>
                     </a>
                 </div>
             <?php else: ?>
                 <div class="mobile-nav-actions">
-                    <a href="/stitch1/pages/auth/login.php" class="mobile-nav-btn mobile-nav-btn-primary">
+                    <a href="/pages/auth/login.php" class="mobile-nav-btn mobile-nav-btn-primary">
                         <?php echo render_icon('login', '', '20px'); ?>
                         <span>Sign In</span>
                     </a>
-                    <a href="/stitch1/pages/auth/register.php" class="mobile-nav-btn mobile-nav-btn-secondary">
+                    <a href="/pages/auth/register.php" class="mobile-nav-btn mobile-nav-btn-secondary">
                         <?php echo render_icon('person_add', '', '20px'); ?>
                         <span>Create Account</span>
                     </a>

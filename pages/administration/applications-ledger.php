@@ -41,7 +41,7 @@ $apps = $db->query($query);
         
         <div class="card p-6 mb-8">
             <h2 class="text-xl font-bold mb-4">Export Matrix Filter</h2>
-            <form action="/stitch1/api/export-ledger.php" method="GET" class="flex items-end gap-4">
+            <form action="/api/export-ledger.php" method="GET" class="flex items-end gap-4">
                 <div class="form-group flex-1">
                     <label class="form-label block mb-2 font-medium">Application Status</label>
                     <select name="status" class="w-full p-2 border rounded">

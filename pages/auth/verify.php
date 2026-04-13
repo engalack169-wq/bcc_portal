@@ -56,7 +56,7 @@ require_once __DIR__ . '/../../includes/header.php';
                         Token Empty: <?php echo empty($token) ? 'YES' : 'NO'; ?>
                     </div>
 
-                    <form class="auth-form" id="verifyForm" method="POST" action="/stitch1/core/auth.php">
+                    <form class="auth-form" id="verifyForm" method="POST" action="/core/auth.php">
                         <input type="hidden" name="action" value="verify_email">
                         <input type="hidden" name="token" value="<?php echo htmlspecialchars($token); ?>">
                         
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             // Submit form
-            fetch('/stitch1/core/auth.php', {
+            fetch('/core/auth.php', {
                 method: 'POST',
                 body: formData
             })

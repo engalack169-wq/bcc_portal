@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../includes/header.php';
                     <p class="auth-subtitle">Enter your credentials to access your account</p>
                 </div>
 
-                <form class="auth-form" id="loginForm" method="POST" action="/stitch1/core/auth.php">
+                <form class="auth-form" id="loginForm" method="POST" action="/core/auth.php">
                     <input type="hidden" name="action" value="login">
                     
                     <div class="form-group">
@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('remember', remember ? '1' : '0');
 
         // Submit form
-        fetch('/stitch1/core/auth.php', {
+        fetch('/core/auth.php', {
             method: 'POST',
             body: formData
         })
@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (intended) {
                         window.location.href = decodeURIComponent(intended);
                     } else {
-                        window.location.href = data.redirect || '/stitch1/pages/citizen-services/dashboard.php';
+                        window.location.href = data.redirect || '/pages/citizen-services/dashboard.php';
                     }
                 }, 1500);
             } else {
@@ -861,7 +861,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Sending...';
 
         // Send request to resend verification
-        fetch('/stitch1/core/auth.php', {
+        fetch('/core/auth.php', {
             method: 'POST',
             body: JSON.stringify({
                 action: 'resend_verification',

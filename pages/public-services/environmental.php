@@ -122,7 +122,7 @@ require_once __DIR__ . '/../../includes/header.php';
         <div class="spaces-grid">
             <div class="space-card">
                 <div class="space-image">
-                    <img src="/stitch1/assets/images/park-placeholder.png" alt="Central Park">
+                    <img src="/assets/images/park-placeholder.png" alt="Central Park">
                 </div>
                 <div class="space-content">
                     <h3>Central Park</h3>
@@ -145,7 +145,7 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
             <div class="space-card">
                 <div class="space-image">
-                    <img src="/stitch1/assets/images/garden-placeholder.png" alt="Botanical Garden">
+                    <img src="/assets/images/garden-placeholder.png" alt="Botanical Garden">
                 </div>
                 <div class="space-content">
                     <h3>Botanical Garden</h3>

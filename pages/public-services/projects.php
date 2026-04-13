@@ -91,7 +91,7 @@ require_once __DIR__ . '/../../includes/header.php';
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-image">
-                    <img src="/stitch1/assets/images/road-construction-project.jpg" alt="Road Construction Project">
+                    <img src="/assets/images/road-construction-project.jpg" alt="Road Construction Project">
                     <div class="project-progress">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 75%;"></div>
@@ -127,7 +127,7 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
             <div class="project-card">
                 <div class="project-image">
-                    <img src="/stitch1/assets/images/hospital-construction-project.jpg" alt="Hospital Construction">
+                    <img src="/assets/images/hospital-construction-project.jpg" alt="Hospital Construction">
                     <div class="project-progress">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 45%;"></div>
@@ -163,7 +163,7 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
             <div class="project-card">
                 <div class="project-image">
-                    <img src="/stitch1/assets/images/school-construction-project.jpg" alt="School Construction">
+                    <img src="/assets/images/school-construction-project.jpg" alt="School Construction">
                     <div class="project-progress">
                         <div class="progress-bar">
                             <div class="progress-fill" style="width: 90%;"></div>
@@ -210,7 +210,7 @@ require_once __DIR__ . '/../../includes/header.php';
         <div class="completed-grid">
             <div class="completed-card">
                 <div class="completed-image">
-                    <img src="/stitch1/assets/images/completed-water-project.jpg" alt="Water Supply Project">
+                    <img src="/assets/images/completed-water-project.jpg" alt="Water Supply Project">
                     <div class="completion-badge">
                         <span class="material-symbols-outlined">task_alt</span>
                         <span>Completed</span>
@@ -235,7 +235,7 @@ require_once __DIR__ . '/../../includes/header.php';
             </div>
             <div class="completed-card">
                 <div class="completed-image">
-                    <img src="/stitch1/assets/images/completed-market-project.jpg" alt="Market Renovation">
+                    <img src="/assets/images/completed-market-project.jpg" alt="Market Renovation">
                     <div class="completion-badge">
                         <span class="material-symbols-outlined">task_alt</span>
                         <span>Completed</span>

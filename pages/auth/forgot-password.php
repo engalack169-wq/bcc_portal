@@ -50,7 +50,7 @@ require_once __DIR__ . '/../../includes/header.php';
                     <p class="auth-subtitle">We'll help you get back into your account</p>
                 </div>
 
-                <form class="auth-form" id="forgotForm" method="POST" action="/stitch1/core/auth.php">
+                <form class="auth-form" id="forgotForm" method="POST" action="/core/auth.php">
                     <input type="hidden" name="action" value="forgot_password">
                     
                     <div class="form-group">
@@ -404,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('email', email);
 
         // Submit form
-        fetch('/stitch1/core/auth.php', {
+        fetch('/core/auth.php', {
             method: 'POST',
             body: formData
         })

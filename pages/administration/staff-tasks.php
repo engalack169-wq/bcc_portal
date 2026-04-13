@@ -261,7 +261,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <p class="task-description">Compile and analyze monthly administrative performance metrics for December 2024.</p>
                             <div class="task-meta">
                                 <div class="task-assignee">
-                                    <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Assignee">
+                                    <img src="/assets/images/user-avatar-placeholder.png" alt="Assignee">
                                     <span>John Doe</span>
                                 </div>
                                 <div class="task-deadline">
@@ -296,7 +296,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <p class="task-description">Review and update all system documentation with latest features and procedures.</p>
                             <div class="task-meta">
                                 <div class="task-assignee">
-                                    <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Assignee">
+                                    <img src="/assets/images/user-avatar-placeholder.png" alt="Assignee">
                                     <span>Jane Smith</span>
                                 </div>
                                 <div class="task-deadline">
@@ -340,7 +340,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <p class="task-description">Organize and coordinate upcoming staff training sessions for Q1 2025.</p>
                             <div class="task-meta">
                                 <div class="task-assignee">
-                                    <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Assignee">
+                                    <img src="/assets/images/user-avatar-placeholder.png" alt="Assignee">
                                     <span>Michael Johnson</span>
                                 </div>
                                 <div class="task-deadline">
@@ -375,7 +375,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <p class="task-description">Conduct quarterly inventory check and restock office supplies.</p>
                             <div class="task-meta">
                                 <div class="task-assignee">
-                                    <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Assignee">
+                                    <img src="/assets/images/user-avatar-placeholder.png" alt="Assignee">
                                     <span>Sarah Williams</span>
                                 </div>
                                 <div class="task-deadline">
@@ -419,7 +419,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <p class="task-description">Complete comprehensive budget analysis for Q4 2024 financial performance.</p>
                             <div class="task-meta">
                                 <div class="task-assignee">
-                                    <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Assignee">
+                                    <img src="/assets/images/user-avatar-placeholder.png" alt="Assignee">
                                     <span>Robert Brown</span>
                                 </div>
                                 <div class="task-deadline">
@@ -463,7 +463,7 @@ require_once __DIR__ . '/../../includes/header.php';
                             <p class="task-description">Deploy latest security patches and update system protocols.</p>
                             <div class="task-meta">
                                 <div class="task-assignee">
-                                    <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Assignee">
+                                    <img src="/assets/images/user-avatar-placeholder.png" alt="Assignee">
                                     <span>Lisa Chen</span>
                                 </div>
                                 <div class="task-deadline">

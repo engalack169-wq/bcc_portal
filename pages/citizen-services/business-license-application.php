@@ -17,8 +17,8 @@ $page_keywords = 'business license application, permit application, commercial l
 
 // Set breadcrumbs
 $breadcrumbs = [
-    ['title' => 'Services', 'url' => '/stitch1/pages/citizen-services/services.php'],
-    ['title' => 'Business License', 'url' => '/stitch1/pages/citizen-services/business-license.php'],
+    ['title' => 'Services', 'url' => '/pages/citizen-services/services.php'],
+    ['title' => 'Business License', 'url' => '/pages/citizen-services/business-license.php'],
     ['title' => 'Application', 'url' => '#']
 ];
 

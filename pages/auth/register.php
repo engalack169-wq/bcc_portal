@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../includes/header.php';
                     <p class="auth-subtitle">Fill in your information to get started</p>
                 </div>
 
-                <form class="auth-form" id="registerForm" method="POST" action="/stitch1/core/auth.php">
+                <form class="auth-form" id="registerForm" method="POST" action="/core/auth.php">
                     <input type="hidden" name="action" value="register">
                     
                     <div class="form-row">
@@ -776,7 +776,7 @@ document.addEventListener('DOMContentLoaded', function() {
         registerBtn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Creating account...';
 
         // Submit form
-        fetch('/stitch1/core/auth.php', {
+        fetch('/core/auth.php', {
             method: 'POST',
             body: formData
         })

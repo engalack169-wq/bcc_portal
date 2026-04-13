@@ -174,7 +174,7 @@ require_once __DIR__ . '/../../includes/header.php';
                     <tr>
                         <td>
                             <div class="staff-info">
-                                <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Staff">
+                                <img src="/assets/images/user-avatar-placeholder.png" alt="Staff">
                                 <span>John Doe</span>
                             </div>
                         </td>
@@ -187,7 +187,7 @@ require_once __DIR__ . '/../../includes/header.php';
                     <tr>
                         <td>
                             <div class="staff-info">
-                                <img src="/stitch1/assets/images/user-avatar-placeholder.png" alt="Staff">
+                                <img src="/assets/images/user-avatar-placeholder.png" alt="Staff">
                                 <span>Jane Smith</span>
                             </div>
                         </td>

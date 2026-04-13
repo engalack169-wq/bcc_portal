@@ -15,7 +15,7 @@ $page_description = 'Manage your profile, services, documents, and account setti
 $page_keywords = 'user profile, account settings, personal information, documents, Bamenda council';
 
 $breadcrumbs = [
-    ['title' => 'Dashboard', 'url' => '/stitch1/pages/citizen-services/dashboard.php'],
+    ['title' => 'Dashboard', 'url' => '/pages/citizen-services/dashboard.php'],
     ['title' => 'My Profile', 'url' => '#']
 ];
 
@@ -78,7 +78,7 @@ require_once __DIR__ . '/../../includes/header.php';
             <div class="profile-card profile-summary">
                 <div class="profile-avatar-section">
                     <div class="avatar-image">
-                        <img src="/stitch1/assets/images/default-profile.jpg" alt="Profile Picture">
+                        <img src="/assets/images/default-profile.jpg" alt="Profile Picture">
                     </div>
                     <button class="btn btn-sm btn-outline btn-upload" id="uploadPhotoBtn">
                         <span class="material-symbols-outlined">camera_alt</span>

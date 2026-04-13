@@ -56,25 +56,25 @@ require_once __DIR__ . '/../../includes/header.php';
                     <?php if (is_authenticated()): ?>
                         <?php 
                         $user_role = get_user_role();
-                        $dashboard_url = '/stitch1/pages/citizen-services/dashboard.php';
+                        $dashboard_url = '/pages/citizen-services/dashboard.php';
                         if ($user_role === 'staff') {
-                            $dashboard_url = '/stitch1/pages/administration/staff-portal.php';
+                            $dashboard_url = '/pages/administration/staff-portal.php';
                         }
                         ?>
                         <a href="<?php echo $dashboard_url; ?>" class="btn btn-primary btn-lg">
                             <span class="material-symbols-outlined">dashboard</span>
                             Go to Your Dashboard
                         </a>
-                        <a href="/stitch1/index.php" class="btn btn-outline btn-lg">
+                        <a href="/index.php" class="btn btn-outline btn-lg">
                             <span class="material-symbols-outlined">home</span>
                             Return Home
                         </a>
                     <?php else: ?>
-                        <a href="/stitch1/pages/auth/login.php" class="btn btn-primary btn-lg">
+                        <a href="/pages/auth/login.php" class="btn btn-primary btn-lg">
                             <span class="material-symbols-outlined">login</span>
                             Sign In
                         </a>
-                        <a href="/stitch1/index.php" class="btn btn-outline btn-lg">
+                        <a href="/index.php" class="btn btn-outline btn-lg">
                             <span class="material-symbols-outlined">home</span>
                             Return Home
                         </a>

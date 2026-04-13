@@ -323,12 +323,12 @@ function check_session() {
 function get_dashboard_url($role) {
     switch ($role) {
         case 'admin':
-            return '/stitch1/pages/administration/dashboard.php';
+            return '/pages/administration/dashboard.php';
         case 'staff':
-            return '/stitch1/pages/administration/staff-portal.php';
+            return '/pages/administration/staff-portal.php';
         case 'citizen':
         default:
-            return '/stitch1/pages/citizen-services/dashboard.php';
+            return '/pages/citizen-services/dashboard.php';
     }
 }
 ?>
