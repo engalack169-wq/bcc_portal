@@ -10,9 +10,12 @@ services:
       - "8080:80"
     environment:
       - DB_DRIVER=sqlite
+      - DB_TYPE=sqlite
       - PHP_ENVIRONMENT=docker
       - LOG_CHANNEL=stderr
       - SESSION_DRIVER=file
+      - ENVIRONMENT=development
+      - DEBUG=false
     volumes:
       - ./:/var/www/html
       - ./data:/var/www/html/data
@@ -21,8 +24,6 @@ services:
       - ./cache:/var/www/html/cache
     networks:
       - bcc_network
-    depends_on:
-      - db
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost/"]
@@ -31,47 +32,6 @@ services:
       retries: 3
       start_period: 10s
 
-  db:
-    image: sqlite:latest
-    container_name: bcc_portal_db
-    volumes:
-      - ./data:/data
-    networks:
-      - bcc_network
-    restart: unless-stopped
-    
-  # Optional: Mailhog for email testing in development
-  mailhog:
-    image: mailhog/mailhog:latest
-    container_name: bcc_portal_mailhog
-    ports:
-      - "1025:1025"
-      - "8025:8025"
-    networks:
-      - bcc_network
-    restart: unless-stopped
-
-  # Optional: Redis for caching
-  redis:
-    image: redis:7-alpine
-    container_name: bcc_portal_redis
-    ports:
-      - "6379:6379"
-    networks:
-      - bcc_network
-    volumes:
-      - redis_data:/data
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-
 networks:
   bcc_network:
     driver: bridge
-
-volumes:
-  redis_data:
-    driver: local
