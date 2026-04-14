@@ -1,7 +1,5 @@
 <?php
 /**
- * Bamenda City Council E-Governance Platform
- * Authentication Handler
  */
 
 // Include required files
@@ -89,25 +87,25 @@ function handle_register() {
         return;
     }
 
-    if (!preg_match('/[A-Z]/', $password)) {
-        echo json_encode(['success' => false, 'message' => 'Password must contain at least one uppercase letter']);
-        return;
-    }
+    // if (!preg_match('/[A-Z]/', $password)) {
+    //     echo json_encode(['success' => false, 'message' => 'Password must contain at least one uppercase letter']);
+    //     return;
+    // }
 
-    if (!preg_match('/[a-z]/', $password)) {
-        echo json_encode(['success' => false, 'message' => 'Password must contain at least one lowercase letter']);
-        return;
-    }
+    // if (!preg_match('/[a-z]/', $password)) {
+    //     echo json_encode(['success' => false, 'message' => 'Password must contain at least one lowercase letter']);
+    //     return;
+    // }
 
-    if (!preg_match('/[0-9]/', $password)) {
-        echo json_encode(['success' => false, 'message' => 'Password must contain at least one number']);
-        return;
-    }
+    // if (!preg_match('/[0-9]/', $password)) {
+    //     echo json_encode(['success' => false, 'message' => 'Password must contain at least one number']);
+    //     return;
+    // }
 
-    if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:\'",.<>?\/\\|`~]/', $password)) {
-        echo json_encode(['success' => false, 'message' => 'Password must contain at least one special character']);
-        return;
-    }
+    // if (!preg_match('/[!@#$%^&*()_+\-=\[\]{};:\'",.<>?\/\\|`~]/', $password)) {
+    //     echo json_encode(['success' => false, 'message' => 'Password must contain at least one special character']);
+    //     return;
+    // }
 
     // Validate age (must be 18 or older)
     if (!empty($date_of_birth)) {

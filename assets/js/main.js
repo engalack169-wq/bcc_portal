@@ -231,8 +231,13 @@ function handleFormSubmit(e) {
     const formData = new FormData(form);
     
     // Special handling for login form
-    if (form.id === 'loginForm') {
+    if (form.id === 'loginForm' && !form.hasAttribute('data-ajax-custom')) {
         handleLoginSubmit(form, formData);
+        return;
+    }
+    
+    // Skip if form has custom handler
+    if (form.hasAttribute('data-ajax-custom')) {
         return;
     }
     
@@ -275,7 +280,7 @@ function handleLoginSubmit(form, formData) {
     submitBtn.innerHTML = '<span class="material-symbols-outlined loading">hourglass_empty</span> Signing In...';
     
     // Submit login via AJAX
-    const url = window.location.origin + '/stitch1/core/auth.php';
+    const url = window.location.origin + '/core/auth.php';
     console.log('Submitting to:', url);
     
     fetch(url, {

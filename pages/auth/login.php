@@ -17,6 +17,7 @@ $breadcrumbs = [
 
 // Include header
 require_once __DIR__ . '/../../includes/header.php';
+require_once __DIR__ . '/../../core/csrf-protection.php';
 ?>
 
 <!-- Hero Section -->
@@ -49,8 +50,9 @@ require_once __DIR__ . '/../../includes/header.php';
                     <p class="auth-subtitle">Enter your credentials to access your account</p>
                 </div>
 
-                <form class="auth-form" id="loginForm" method="POST" action="/core/auth.php">
+                <form class="auth-form" id="loginForm" method="POST" action="/core/auth.php" data-ajax-custom="true">
                     <input type="hidden" name="action" value="login">
+                    <?php echo CSRFProtection::getTokenField(); ?>
                     
                     <div class="form-group">
                         <label for="email" class="form-label">
@@ -507,6 +509,12 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('email', email);
         formData.append('password', password);
         formData.append('remember', remember ? '1' : '0');
+        
+        // Add CSRF token
+        const csrfToken = document.querySelector('input[name="_csrf_token"]')?.value;
+        if (csrfToken) {
+            formData.append('_csrf_token', csrfToken);
+        }
 
         // Submit form
         fetch('/core/auth.php', {

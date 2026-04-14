@@ -17,6 +17,7 @@ $breadcrumbs = [
 
 // Include header
 require_once __DIR__ . '/../../includes/header.php';
+require_once __DIR__ . '/../../core/csrf-protection.php';
 ?>
 
 <!-- Hero Section -->
@@ -49,8 +50,9 @@ require_once __DIR__ . '/../../includes/header.php';
                     <p class="auth-subtitle">Fill in your information to get started</p>
                 </div>
 
-                <form class="auth-form" id="registerForm" method="POST" action="/core/auth.php">
+                <form class="auth-form" id="registerForm" method="POST" action="/core/auth.php" data-ajax-custom="true">
                     <input type="hidden" name="action" value="register">
+                    <?php echo CSRFProtection::getTokenField(); ?>
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -774,7 +776,6 @@ document.addEventListener('DOMContentLoaded', function() {
         loadingOverlay.style.display = 'flex';
         registerBtn.disabled = true;
         registerBtn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Creating account...';
-
         // Submit form
         fetch('/core/auth.php', {
             method: 'POST',

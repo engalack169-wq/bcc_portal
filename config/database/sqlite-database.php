@@ -48,7 +48,7 @@ class SQLiteDatabase {
     private function connect() {
         try {
             // Determine database path
-            $db_dir = __DIR__ . '/../../data';
+            $db_dir = __DIR__ . '/../../db_storage';
             
             // Create data directory if it doesn't exist
             if (!is_dir($db_dir)) {
@@ -84,6 +84,13 @@ class SQLiteDatabase {
      * Get database connection (PDO)
      */
     public function getConnection() {
+        return SQLiteDatabaseWrapper::getInstance($this);
+    }
+
+    /**
+     * Get raw PDO connection
+     */
+    public function getRawConnection() {
         return $this->connection;
     }
     
@@ -99,6 +106,8 @@ class SQLiteDatabase {
      */
     public function prepare($sql) {
         try {
+            // Replace MySQL-specific NOW() with SQLite CURRENT_TIMESTAMP
+            $sql = str_ireplace('NOW()', 'CURRENT_TIMESTAMP', $sql);
             return $this->connection->prepare($sql);
         } catch (PDOException $e) {
             error_log("Prepare failed: " . $e->getMessage());
@@ -284,6 +293,15 @@ class SQLitePreparedStatement {
     public function error() {
         return $this->stmt->errorInfo()[2] ?? '';
     }
+
+    /**
+     * Magic getter for mysqli properties
+     */
+    public function __get($name) {
+        if ($name === 'error') return $this->error();
+        if ($name === 'errno') return $this->stmt->errorCode();
+        return null;
+    }
     
     /**
      * Get number of affected rows
@@ -347,23 +365,31 @@ class SQLiteResult {
     public function reset() {
         $this->position = 0;
     }
+
+    /**
+     * Magic getter for mysqli properties
+     */
+    public function __get($name) {
+        if ($name === 'num_rows') return $this->num_rows();
+        return null;
+    }
 }
 
 // Wrapper to maintain MySQLi compatibility
 class SQLiteDatabaseWrapper {
     private $db;
     
-    public function __construct() {
-        $this->db = new SQLiteDatabase();
+    public function __construct($db = null) {
+        $this->db = $db ?: new SQLiteDatabase();
     }
     
     /**
      * Get singleton instance
      */
-    public static function getInstance() {
+    public static function getInstance($db = null) {
         static $instance;
         if (!isset($instance)) {
-            $instance = new self();
+            $instance = new self($db);
         }
         return $instance;
     }
@@ -380,14 +406,31 @@ class SQLiteDatabaseWrapper {
      * Direct query execution
      */
     public function query($sql) {
-        return $this->db->query($sql);
+        $res = $this->db->query($sql);
+        return new SQLiteResult($res);
     }
     
     /**
-     * Get connection
+     * Magic getter for mysqli properties
+     */
+    public function __get($name) {
+        if ($name === 'insert_id') return $this->db->lastInsertId();
+        if ($name === 'error') return $this->db->getConnection()->errorInfo()[2] ?? '';
+        return null;
+    }
+    
+    /**
+     * Escape string (PDO doesn't have real_escape_string, use quote)
+     */
+    public function real_escape_string($string) {
+        return trim($this->db->getRawConnection()->quote($string), "'");
+    }
+
+    /**
+     * Get connection (returns itself for chaining compatibility)
      */
     public function getConnection() {
-        return $this->db->getConnection();
+        return $this;
     }
     
     /**
@@ -437,6 +480,13 @@ class SQLiteDatabaseWrapper {
      */
     public function backup($path) {
         return $this->db->backup($path);
+    }
+
+    /**
+     * Close connection
+     */
+    public function close() {
+        return $this->db->close();
     }
 }
 
