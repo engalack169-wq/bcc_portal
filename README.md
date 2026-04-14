@@ -69,33 +69,38 @@ stitch1/
 - Safari 14+
 - Edge 90+
 
-## 🚀 Installation
+## 🚀 Installation & Local Setup
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/bamenda-city-council/e-governance-platform.git
-   cd e-governance-platform
-   ```
+### 1. Prerequisite (PHP 8.0+)
+Ensure you have PHP 8.0 or higher installed. The platform uses SQLite by default for easy local setup, so no MySQL installation is strictly required.
 
-2. **Configure database**
-   - Create a new database
-   - Import the provided SQL schema
-   - Update database credentials in `config/database.php`
+### 2. Initial Setup
+```bash
+# Clone the repository
+git clone <repo-url>
+cd bcc_portal
 
-3. **Configure web server**
-   - Point document root to the project directory
-   - Configure URL rewriting for clean URLs
-   - Set up SSL certificate
+# Initialize the database (SQLite)
+# This creates tables and a default admin account
+php setup_database.php
+```
 
-4. **Set file permissions**
-   ```bash
-   chmod 755 -R .
-   chmod 777 assets/uploads/
-   ```
+### 3. Run the Development Server
+```bash
+# Start the built-in PHP server
+php -S localhost:8080
+```
+Then navigate to **http://localhost:8080** in your browser.
 
-5. **Access the platform**
-   - Open your browser and navigate to your domain
-   - Follow the setup wizard to complete installation
+### 4. Admin Credentials
+- **Email**: `admin@bamendacity.gov.cm`
+- **Password**: `admin123!@#`
+
+### 5. File Permissions (Linux/macOS)
+The database is stored in `db_storage/`. Ensure the PHP process has write access to this directory:
+```bash
+chmod 775 -R db_storage/
+```
 
 ## 🐳 Docker Quick Start (Recommended)
 
