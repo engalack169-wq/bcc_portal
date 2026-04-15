@@ -114,32 +114,78 @@ try {
         }
     }
 
-    // Insert default admin user if not exists
-    $admin_email = 'admin@bamendacity.gov.cm';
-    $admin_password = password_hash('admin123!@#', PASSWORD_DEFAULT);
+    // Insert sample demo users for all 3 user types
+    echo "\nSetting up demo user accounts...\n";
     
-    $check_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
-    $check_stmt->bind_param("s", $admin_email);
-    $check_stmt->execute();
-    $check_result = $check_stmt->get_result();
+    $sample_users = [
+        [
+            'first_name' => 'System',
+            'last_name' => 'Administrator',
+            'email' => 'admin@bamendacity.gov.cm',
+            'password' => 'admin123!@#',
+            'role' => 'admin',
+            'display_name' => 'System Administrator',
+        ],
+        [
+            'first_name' => 'Joseph',
+            'last_name' => 'Nkongwei',
+            'email' => 'staff@bamendacity.gov.cm',
+            'password' => 'staff123!@#',
+            'role' => 'staff',
+            'display_name' => 'Staff Officer',
+        ],
+        [
+            'first_name' => 'Emily',
+            'last_name' => 'Ngomsi',
+            'email' => 'citizen@example.com',
+            'password' => 'citizen123!@#',
+            'role' => 'citizen',
+            'display_name' => 'Emily Ngomsi',
+        ],
+    ];
 
-    if ($check_result->num_rows === 0) {
-        $insert_stmt = $conn->prepare("
-            INSERT INTO users (first_name, last_name, email, password, role, display_name, status)
-            VALUES ('System', 'Administrator', ?, ?, 'admin', 'System Administrator', 'active')
-        ");
-        $insert_stmt->bind_param("ss", $admin_email, $admin_password);
+    foreach ($sample_users as $user) {
+        $check_stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $check_stmt->bind_param("s", $user['email']);
+        $check_stmt->execute();
+        $check_result = $check_stmt->get_result();
 
-        if ($insert_stmt->execute()) {
-            echo "✓ Admin user created successfully!\n";
-            echo "  Email: {$admin_email}\n";
-            echo "  Password: admin123!@#\n";
+        if ($check_result->num_rows === 0) {
+            $hashed_password = password_hash($user['password'], PASSWORD_DEFAULT);
+            $insert_stmt = $conn->prepare("
+                INSERT INTO users (first_name, last_name, email, password, role, display_name, status, phone, gender)
+                VALUES (?, ?, ?, ?, ?, ?, 'active', '+237123456789', 'M')
+            ");
+            $insert_stmt->bind_param(
+                "ssssss",
+                $user['first_name'],
+                $user['last_name'],
+                $user['email'],
+                $hashed_password,
+                $user['role'],
+                $user['display_name']
+            );
+
+            if ($insert_stmt->execute()) {
+                $role_label = ucfirst($user['role']);
+                echo "✓ {$role_label} user created successfully!\n";
+                echo "  Name: {$user['first_name']} {$user['last_name']}\n";
+                echo "  Email: {$user['email']}\n";
+                echo "  Password: {$user['password']}\n\n";
+            }
+        } else {
+            $role_label = ucfirst($user['role']);
+            echo "✓ {$role_label} user ({$user['email']}) already exists.\n\n";
         }
-    } else {
-        echo "✓ Admin user already exists.\n";
     }
 
-    echo "\nDatabase setup completed successfully!\n";
+    echo "================================================\n";
+    echo "Database setup completed successfully!\n";
+    echo "================================================\n\n";
+    echo "Demo Account Credentials:\n";
+    echo "- Admin:  admin@bamendacity.gov.cm / admin123!@#\n";
+    echo "- Staff:  staff@bamendacity.gov.cm / staff123!@#\n";
+    echo "- Citizen: citizen@example.com / citizen123!@#\n";
 
 } catch (Exception $e) {
     echo "✗ Database setup failed: " . $e->getMessage() . "\n";
