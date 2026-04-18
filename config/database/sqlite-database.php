@@ -47,12 +47,12 @@ class SQLiteDatabase {
      */
     private function connect() {
         try {
-            // Determine database path
-            $db_dir = __DIR__ . '/../../db_storage';
+            // Determine database path - use /data directory for persistence
+            $db_dir = __DIR__ . '/../../data';
             
             // Create data directory if it doesn't exist
             if (!is_dir($db_dir)) {
-                mkdir($db_dir, 0755, true);
+                mkdir($db_dir, 0777, true);
             }
             
             $db_name = $this->config['database']['name'] ?? 'bamenda_council_db';

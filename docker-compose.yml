@@ -15,13 +15,14 @@ services:
       - LOG_CHANNEL=stderr
       - SESSION_DRIVER=file
       - ENVIRONMENT=development
-      - DEBUG=false
+      - DEBUG=true
     volumes:
       - ./:/var/www/html
       - ./data:/var/www/html/data
       - ./uploads:/var/www/html/uploads
       - ./logs:/var/www/html/logs
       - ./cache:/var/www/html/cache
+      - ./sessions:/var/www/html/sessions
     networks:
       - bcc_network
     restart: unless-stopped

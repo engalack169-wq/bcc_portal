@@ -16,7 +16,22 @@ $action = $_POST['action'] ?? $_GET['action'] ?? '';
 // Validate CSRF token for state-changing operations
 if (in_array($action, ['login', 'register', 'logout'])) {
     $csrf_token = $_POST['_csrf_token'] ?? $_GET['_csrf_token'] ?? '';
+    
+    // Debug logging
+    $debug = getenv('DEBUG') === 'true' || getenv('ENVIRONMENT') === 'development';
+    if ($debug) {
+        error_log("CSRF Validation - Action: {$action}, Token provided: " . (!empty($csrf_token) ? 'YES' : 'NO'));
+        error_log("Session tokens stored: " . json_encode($_SESSION['_csrf_tokens'] ?? []));
+        error_log("Session ID: " . session_id());
+    }
+    
     if (!CSRFProtection::validateToken($csrf_token)) {
+        // Additional debugging for token mismatch
+        if ($debug) {
+            error_log("CSRF Token validation FAILED");
+            error_log("Provided token: " . substr($csrf_token, 0, 10) . "...");
+            error_log("Session tokens: " . json_encode($_SESSION['_csrf_tokens'] ?? []));
+        }
         echo json_encode(['success' => false, 'message' => 'Invalid security token. Please try again.']);
         exit;
     }
@@ -163,7 +178,12 @@ function handle_register() {
             $address, $role, $hashed_password, $status
         );
 
-        if ($insert_stmt->execute()) {
+        try {
+            $result = $insert_stmt->execute();
+            if (!$result) {
+                throw new Exception('Failed to execute INSERT: ' . ($insert_stmt->error ?? 'Unknown error'));
+            }
+            
             // Set session for new user (auto-login)
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
@@ -181,13 +201,14 @@ function handle_register() {
                 'message' => 'Account created successfully',
                 'redirect' => get_dashboard_url($role)
             ]);
-        } else {
-            throw new Exception('Failed to create account: ' . $insert_stmt->error);
+        } catch (Exception $e) {
+            error_log("Registration insert error: " . $e->getMessage());
+            throw $e;
         }
 
     } catch (Throwable $e) {
         error_log("Registration error: " . $e->getMessage());
-        $config = require __DIR__ . '/../config/app/config.php';
+        $config = @include __DIR__ . '/../config/app/config.php';
         $responseMessage = 'Unable to create account. Please try again.';
         if (!empty($config['app']['debug'])) {
             $responseMessage = $e->getMessage();

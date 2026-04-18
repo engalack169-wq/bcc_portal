@@ -13,10 +13,24 @@ class CSRFProtection {
     
     /**
      * Initialize CSRF protection - start session if needed
+     * Ensures session is properly configured before starting
      */
     public static function init() {
+        // Only start session if not already started
         if (session_status() === PHP_SESSION_NONE) {
+            // Ensure session directory exists and is writable
+            $session_path = ini_get('session.save_path');
+            if (!empty($session_path) && !is_dir($session_path)) {
+                @mkdir($session_path, 0777, true);
+            }
+            
+            // Start session with proper configuration
             session_start();
+            
+            // Log session initialization (for debugging)
+            if (defined('DEBUG_CSRF') && DEBUG_CSRF) {
+                error_log('CSRF Session started. Session ID: ' . session_id() . ', Path: ' . ini_get('session.save_path'));
+            }
         }
     }
     

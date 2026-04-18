@@ -37,16 +37,21 @@ RUN echo "upload_max_filesize = 50M" >> /usr/local/etc/php/conf.d/uploads.ini \
     && echo "error_reporting = E_ALL" >> /usr/local/etc/php/conf.d/errors.ini \
     && echo "display_errors = off" >> /usr/local/etc/php/conf.d/errors.ini \
     && echo "log_errors = on" >> /usr/local/etc/php/conf.d/errors.ini \
-    && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/errors.ini
+    && echo "error_log = /var/log/php_errors.log" >> /usr/local/etc/php/conf.d/errors.ini \
+    && echo "session.save_path = /var/www/html/sessions" >> /usr/local/etc/php/conf.d/sessions.ini \
+    && echo "session.save_handler = files" >> /usr/local/etc/php/conf.d/sessions.ini \
+    && echo "session.gc_maxlifetime = 86400" >> /usr/local/etc/php/conf.d/sessions.ini \
+    && echo "session.gc_probability = 1" >> /usr/local/etc/php/conf.d/sessions.ini \
+    && echo "session.gc_divisor = 100" >> /usr/local/etc/php/conf.d/sessions.ini
 
 # Create necessary directories with permissions
 RUN mkdir -p /var/www/html/data /var/www/html/uploads/documents /var/www/html/uploads/avatars \
-    && mkdir -p /var/www/html/logs /var/www/html/cache
+    && mkdir -p /var/www/html/logs /var/www/html/cache /var/www/html/sessions
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html \
-    && chmod -R 775 /var/www/html/data /var/www/html/uploads /var/www/html/logs /var/www/html/cache
+    && chmod -R 777 /var/www/html/data /var/www/html/uploads /var/www/html/logs /var/www/html/cache /var/www/html/sessions
 
 # Copy and set up entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
